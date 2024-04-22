@@ -1,0 +1,7 @@
+Documentacion
+
+React -> https://react.dev/learn
+TailwindCSS -> https://tailwindcss.com/docs/installation
+NextUI -> https://nextui.org/docs/guide/installation
+ReactRouter -> https://reactrouter.com/en/main
+ReactIcons -> https://react-icons.github.io/react-icons/

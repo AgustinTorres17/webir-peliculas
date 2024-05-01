@@ -1,0 +1,19 @@
+.animated-opacity {
+
+    view-timeline-name: --fade-in;
+    view-timeline-axis: block;
+
+    animation-timeline: --fade-in;
+    animation-name: fadeIn;
+    animation-fill-mode: both;
+    animation-range: entry 25% cover 40%;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

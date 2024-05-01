@@ -3,11 +3,6 @@ const {nextui} = require("@nextui-org/react");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    screens: {
-      mobile: "375px",
-      tablet: "768px",
-      desktop: "1024px",
-    },
     fontSize: {
       xs: ["14px", {lineHeight: "24px", letterSpacing: "-0.03em"}],
       sm: ["16px", {lineHeight: "28px", letterSpacing: "-0.03em"}],

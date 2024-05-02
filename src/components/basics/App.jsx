@@ -16,7 +16,6 @@ function App() {
           <Header />
           <Carousel className="h-[calc(100vh-620px)]" slides={images} />
         </div>
-        <div className="h-[400px]">Hola</div>
       </div>
     </>
   );

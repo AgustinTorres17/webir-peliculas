@@ -4,7 +4,6 @@ import { Slider } from "./Slider";
 
 import { Carousel } from "./Carousel";
 import { Image } from "@nextui-org/react";
-
 function App() {
   const images = [
     "https://4kwallpapers.com/images/wallpapers/avatar-the-last-3840x2160-13576.jpg",
@@ -19,8 +18,8 @@ function App() {
         <div className="h-screen">
           <Header />
           <Carousel className="h-[calc(100vh-620px)]" slides={images} />
-          <Slider />
         </div>
+        <Slider />
       </div>
 
     </>

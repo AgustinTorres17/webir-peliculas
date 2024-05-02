@@ -15,7 +15,7 @@ function App() {
     <>
 
       <div className="w-full p-0 m-0 bg-primario flex items-center flex-col">
-        <div className="h-screen">
+        <div className="md:h-screen">
           <Header />
           <Carousel className="h-[calc(100vh-620px)]" slides={images} />
         </div>

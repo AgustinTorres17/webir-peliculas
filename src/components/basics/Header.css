@@ -8,7 +8,7 @@
     animation-fill-mode: both;
     animation-range: entry 25% cover 40%;
 }
-a
+
 @keyframes fadeIn {
     from {
         opacity: 0;

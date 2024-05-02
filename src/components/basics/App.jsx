@@ -19,7 +19,14 @@ function App() {
           <Header />
           <Carousel className="h-[calc(100vh-620px)]" slides={images} />
         </div>
-        <Slider />
+        <div className="w-full justify-start content-start">
+          <h1 className="text-4xl text-white m-5 md:m-2">Películas</h1>
+          <Slider />
+          <h1 className="text-4xl text-white m-5 md:m-2">Series</h1>
+          <Slider />
+          <h1 className="text-4xl text-white m-5 md:m-2">Anime</h1>
+          <Slider />
+        </div>
       </div>
 
     </>

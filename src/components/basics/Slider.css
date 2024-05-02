@@ -19,13 +19,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.2);
   color: white;
   border: none;
   padding: 40px;
   cursor: pointer;
   opacity: 0; /* Inicialmente oculto */
-  transition: opacity 0.3s ease; /* Suaviza la transición */
+  transition: opacity 1s ease; /* Suaviza la transición */
 }
 
 .prev {
@@ -41,9 +41,11 @@
   width: 300px;
   height: 150px;
   margin-right: 20px;
+  margin-left: 10px;
   background-color: #f0f0f0;
   text-align: center;
   line-height: 150px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .container-cont {
@@ -52,7 +54,7 @@
   overflow-y: hidden;
   overflow-x: hidden;
   position: relative;
-  margin-top: 20px;
+
   margin-bottom: 20px;
 }
 

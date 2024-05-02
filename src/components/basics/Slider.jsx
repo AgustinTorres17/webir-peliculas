@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Slider.css';
 
 export const Slider = () => {
+    const scrollContainerRef = useRef(null);
+    const prevButtonRef = useRef(null);
+    const nextButtonRef = useRef(null);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector('.scroll-container');
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
+        const scrollContainer = scrollContainerRef.current;
+        const prevButton = prevButtonRef.current;
+        const nextButton = nextButtonRef.current;
 
         let isDown = false;
         let startX;
@@ -62,36 +65,36 @@ export const Slider = () => {
             scrollContainer.scrollLeft += 800; // Ajusta la cantidad de desplazamiento
         }
 
-        scrollContainer?.addEventListener('mousedown', handleMouseDown);
-        scrollContainer?.addEventListener('touchstart', handleTouchStart);
-        scrollContainer?.addEventListener('mouseleave', handleMouseLeave);
-        scrollContainer?.addEventListener('mouseup', handleMouseUp);
-        scrollContainer?.addEventListener('touchend', handleTouchEnd);
-        scrollContainer?.addEventListener('mousemove', handleMouseMove);
-        scrollContainer?.addEventListener('touchmove', handleTouchMove);
+        scrollContainer.addEventListener('mousedown', handleMouseDown);
+        scrollContainer.addEventListener('touchstart', handleTouchStart);
+        scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+        scrollContainer.addEventListener('mouseup', handleMouseUp);
+        scrollContainer.addEventListener('touchend', handleTouchEnd);
+        scrollContainer.addEventListener('mousemove', handleMouseMove);
+        scrollContainer.addEventListener('touchmove', handleTouchMove);
 
-        prevButton?.addEventListener('click', handlePrevButtonClick);
-        nextButton?.addEventListener('click', handleNextButtonClick);
+        prevButton.addEventListener('click', handlePrevButtonClick);
+        nextButton.addEventListener('click', handleNextButtonClick);
 
         return () => {
-            scrollContainer?.removeEventListener('mousedown', handleMouseDown);
-            scrollContainer?.removeEventListener('touchstart', handleTouchStart);
-            scrollContainer?.removeEventListener('mouseleave', handleMouseLeave);
-            scrollContainer?.removeEventListener('mouseup', handleMouseUp);
-            scrollContainer?.removeEventListener('touchend', handleTouchEnd);
-            scrollContainer?.removeEventListener('mousemove', handleMouseMove);
-            scrollContainer?.removeEventListener('touchmove', handleTouchMove);
+            scrollContainer.removeEventListener('mousedown', handleMouseDown);
+            scrollContainer.removeEventListener('touchstart', handleTouchStart);
+            scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+            scrollContainer.removeEventListener('mouseup', handleMouseUp);
+            scrollContainer.removeEventListener('touchend', handleTouchEnd);
+            scrollContainer.removeEventListener('mousemove', handleMouseMove);
+            scrollContainer.removeEventListener('touchmove', handleTouchMove);
 
-            prevButton?.removeEventListener('click', handlePrevButtonClick);
-            nextButton?.removeEventListener('click', handleNextButtonClick);
+            prevButton.removeEventListener('click', handlePrevButtonClick);
+            nextButton.removeEventListener('click', handleNextButtonClick);
         };
     }, []);
 
     return (
         <div className="container-cont">
-            <div className="scroll-container cursor-grab select-none">
+            <div ref={scrollContainerRef} className="scroll-container cursor-grab select-none">
                 <div className="content">
-                    <div className="item">
+                <div className="item">
                         <img src="https://www.mubis.es/media/articles/30146/288548/dune-de-denis-villeneuve-anunciada-en-steelbook-uhd-4k-y-blu-ray-original.jpg" alt="Descripción de la imagen 1" />
                         Elemento 1
                     </div>
@@ -142,11 +145,10 @@ export const Slider = () => {
                         <img src="https://www.mubis.es/media/articles/30146/288548/dune-de-denis-villeneuve-anunciada-en-steelbook-uhd-4k-y-blu-ray-original.jpg" alt="Descripción de la imagen 1" />
                         Elemento 1
                     </div>
-                    {/* Otros elementos */}
                 </div>
             </div>
-            <button className="scroll-btn prev">❮</button>
-            <button className="scroll-btn next">❯</button>
+            <button ref={prevButtonRef} className="scroll-btn prev">❮</button>
+            <button ref={nextButtonRef} className="scroll-btn next">❯</button>
         </div>
     );
 };

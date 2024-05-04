@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "./Carousel.css";
 

@@ -39,7 +39,7 @@ export const Header = () => {
       <div className="w-full  items-center text-fuente gap-5 bg-primario/80 flex justify-center text-xl fixed bottom-0 left-0 right-0 py-3 z-50 animated-opacity sm:static sm:bg-transparent">
         
           <Link
-            to="/home"
+            to="/"
             className="hover:text-accent transition-all ease-in no-underline text-fuente"
             href=""
           >

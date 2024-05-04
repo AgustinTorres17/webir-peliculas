@@ -6,6 +6,7 @@ import { FaSearch, FaHome, FaSearchPlus } from "react-icons/fa";
 import { Input } from "@nextui-org/react";
 import {useState, useEffect} from "react";
 import { FaList } from "react-icons/fa6";
+import { Button } from "@/components/ui/button"
 export const Header = () => {
   const [opacity, setOpacity] = useState(1);
   useEffect(() => {
@@ -41,26 +42,10 @@ export const Header = () => {
         <FaSearchPlus className="sm:hidden"/>
         <span className="text-sm text-fuente hover:text-accent hidden sm:block">Busqueda Avanzada</span>
         </a>
+        <Button variant="">Hola</Button>
       </div>
       <div className="flex items-center max-w-72 min-w-44 lg:min-w-56">
-        <Input
-          type="text"
-          placeholder="Busca tu pelicula favorita"
-          labelPlacement="outside"
-          endContent={<FaSearch className="" />}
-          classNames={{
-            input: "bg-transparent text-fuente w-full",
-            innerWrapper: "bg-transparent text-fuente hover:text-primario focus-within:text-primario",
-            inputWrapper: [
-              "shadow-xl",
-              "bg-primario",
-              "text-fuente",
-              "hover:text-accent",
-            ],
-            placeholder: "text-fuente",
-          }}
-          
-        />
+
       </div>
     </div>
   

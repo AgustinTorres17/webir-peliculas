@@ -16,8 +16,9 @@ const buttonVariants = cva(
           "border border-input bg-transparent hover:bg-fuente hover:text-accent-oscuro/80",
         secondary:
           "bg-fuente text-fondo hover:bg-fuente/80",
-        ghost: "hover:bg-accent/70 hover:text-accent-foreground",
-        link: "text-fuente underline-offset-4 hover:underline",
+        ghost: "bg-accent  hover:text-white text-primario",
+        link: "text-fuente underline-offset-4 hover:underline hover:text-accent",
+        favedMovie: "text-fuente bg-accent hover:bg-destructive/80",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -1,12 +1,13 @@
 import React from "react";
-import "./App.css";
+import "../App.css";
 import "./Header.css";
 import { RiMovie2Fill } from "react-icons/ri";
-import { FaSearch, FaHome, FaSearchPlus } from "react-icons/fa";
-import { Input } from "@nextui-org/react";
+import { FaHome, FaSearchPlus, FaSearch } from "react-icons/fa";
 import {useState, useEffect} from "react";
 import { FaList } from "react-icons/fa6";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 export const Header = () => {
   const [opacity, setOpacity] = useState(1);
   useEffect(() => {
@@ -29,7 +30,7 @@ export const Header = () => {
         <RiMovie2Fill />
         <span>QuePinta</span>
       </div>
-      <div className="w-full items-center text-fuente gap-5 bg-primario/80 flex justify-center text-xl fixed bottom-0 left-0 right-0 py-3 z-50 animated-opacity sm:static sm:bg-transparent">
+      <div className="w-full  items-center text-fuente gap-5 bg-primario/80 flex justify-center text-xl fixed bottom-0 left-0 right-0 py-3 z-50 animated-opacity sm:static sm:bg-transparent">
         <a className="hover:text-accent transition-all ease-in no-underline text-fuente" href="">
         <FaHome className="sm:hidden"/>
         <span className="text-sm text-fuente hover:text-accent hidden sm:block">Inicio</span>
@@ -42,10 +43,12 @@ export const Header = () => {
         <FaSearchPlus className="sm:hidden"/>
         <span className="text-sm text-fuente hover:text-accent hidden sm:block">Busqueda Avanzada</span>
         </a>
-        <Button variant="">Hola</Button>
       </div>
-      <div className="flex items-center max-w-72 min-w-44 lg:min-w-56">
-
+      <div className="flex gap-2">
+        <Input/>
+        <Button variant="default">
+          <FaSearch/>
+        </Button>
       </div>
     </div>
   

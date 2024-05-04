@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@nextui-org/react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import "./Carousel.css";
+
 
 export const Carousel = ({ slides }) => {
   const [curr, setCurr] = useState(0);
@@ -35,6 +37,7 @@ export const Carousel = ({ slides }) => {
 
   return (
     <div
+      id="carousel-homepage"
       className="overflow-hidden relative md:min-h-full cursor-grab"
       onMouseDown={(e) => handleStart(e.clientX)}
       onMouseMove={(e) => handleMove(e.clientX)}
@@ -58,21 +61,21 @@ export const Carousel = ({ slides }) => {
             key={index}
             src={slide}
             alt="slide"
-            className="overflow-hidden w-screen object-cover object-center"
+            className="overflow-hidden w-screen object-cover object-center fade-bottom"
           />
         ))}
       </div>
-      <div className="absolute inset-0 flex items-center justify-between p-4 z-50">
+      <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prev}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300 top-1/2 left-4 transform -translate-y-1/2"
           color="secondary"
         >
           <FaArrowLeft />
         </button>
         <button
           onClick={next}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300 top-1/2 right-4 transform -translate-y-1/2"
           color="secondary"
         >
           <FaArrowRight />

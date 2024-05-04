@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost: "bg-accent  hover:text-white text-primario",
         link: "text-fuente underline-offset-4 hover:underline hover:text-accent",
         favedMovie: "text-fuente bg-accent hover:bg-destructive/80",
+        unFavedMovie: "bg-fuente text-fondo hover:text-accent hover:bg-primario"
       },
       size: {
         default: "h-10 px-4 py-2",

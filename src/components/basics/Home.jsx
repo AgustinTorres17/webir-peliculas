@@ -58,8 +58,8 @@ export const Home = () => {
         className="w-full justify-start content-start md:fade-in-anim z-10"
         style={{ opacity: opacity }}
       >
-        <div className="ml-10 mt-10 mb-20 lg:text-4xl text-2xl space-y-5">
-          <h1 className=" text-white lg:m-5">Películas</h1>
+        <div className="ml-11 mt-10 mb-20 lg:text-4xl text-2xl space-y-5">
+          <h1 className=" text-white lg:text-start pr-11 text-center lg:m-5">Películas</h1>
           <Slider
             movies={[
               {
@@ -113,7 +113,7 @@ export const Home = () => {
               },
             ]}
           />
-          <h1 className="text-white lg:m-5">Series</h1>
+          <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Series</h1>
           <Slider
             movies={[
               {
@@ -169,7 +169,7 @@ export const Home = () => {
           />
           
         </div>
-        <h1 className=" text-white text-2xl lg:text-4xl lg:m-10 m-3">Recomendacion Semanal</h1>
+        <h1 className=" text-white text-2xl lg:text-4xl lg:text-start text-center lg:m-10 m-3">Recomendacion Semanal</h1>
           <SemanalMovie title="La Sociedad de la Nieve" imageUrl="https://pics.filmaffinity.com/La_sociedad_de_la_nieve-323264210-large.jpg" year="2024" description="Un avión uruguayo en el que viajan los jugadores del equipo de rugby del Old Christians Club de Montevideo se estrella en la cordillera de los Andes y los supervivientes deben sobreponerse a las condiciones extremas para mantenerse vivos." />
 
       </div>

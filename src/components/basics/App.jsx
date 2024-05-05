@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MoviePage } from "./MoviePage";
 import { SearchPage } from "./SearchPage";
 import { Home } from "./Home";
+import { MiLista } from "./MiLista";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/movie" element={<MoviePage />} />
+          <Route path="/miLista" component={<MiLista/>} />
         </Routes>
     </>
   );

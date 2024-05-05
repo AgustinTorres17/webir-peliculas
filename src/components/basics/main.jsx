@@ -5,6 +5,8 @@ import { Home } from "./Home.jsx";
 
 import { SearchPage } from "./SearchPage.jsx";
 
+import { MiLista } from "./MiLista.jsx";
+
 import { MoviePage } from "./MoviePage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/movie",
     element: <MoviePage />,
+  },
+  {
+    path: "/miLista",
+    element: <MiLista/>,
   },
 ]);
 

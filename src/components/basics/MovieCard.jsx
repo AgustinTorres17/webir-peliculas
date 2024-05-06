@@ -4,7 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 
 export const MovieCard = ({title, genre, year, imageUrl }) => {
     return (
-        <div className="relative overflow-hidden w-48 md:w-72 aspect-video">
+        <div className="relative overflow-hidden aspect-video">
             <img className="object-cover h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110" src={imageUrl} alt={title} />
             <div className="absolute inset-0 text-center text-pretty bg-black bg-opacity-60 flex flex-col items-center justify-between md:justify-center md:p-4 md:gap-1 opacity-0 hover:opacity-100 active:opacity-100 transition-opacity duration-500">
                 <div className='md:hidden'></div>

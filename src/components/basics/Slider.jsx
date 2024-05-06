@@ -12,12 +12,14 @@ export const Slider = ({ movies }) => {
       <CarouselContent className="flex gap-4 cursor-grab justify-start">
         {movies.map((movie, index) => (
           <CarouselItem className="basis-auto pl-0" key={index}>
-            <MovieCard
-              title={movie.title}
-              genre={movie.genre}
-              year={movie.year}
-              imageUrl={movie.imageUrl}
-            />
+            <div className="w-48 md:w-72 ">
+              <MovieCard
+                title={movie.title}
+                genre={movie.genre}
+                year={movie.year}
+                imageUrl={movie.imageUrl}
+              />
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>

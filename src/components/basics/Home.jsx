@@ -38,7 +38,7 @@ export const Home = () => {
       let newOpacity = window.scrollY / 400;
       if (newOpacity > 1) newOpacity = 1;
       setOpacity(newOpacity);
-      if (!carouselHome.classList.contains("carousel") && window.scrollY > 100)
+      if (carouselHome && !carouselHome.classList.contains("carousel") && window.scrollY > 100)
         carouselHome.classList.add("carousel");
       carouselHomeContainer.classList.add("carousel-scroll");
     }

@@ -76,7 +76,7 @@ export const MoviePage = () => {
     <>
       <Header />
       <div className="w-full bg-fondo flex justify-center pt-12">
-        <main className="bg-gradient-to-t from-fondo/70 to-fondo-claro flex flex-col gap-5 md:justify-center md:items-center w-fit shadow-primario/10 shadow-xl">
+        <main className="bg-gradient-to-t from-fondo-claro/20 via-fondo to-fondo-claro/20 flex flex-col gap-5 md:justify-center md:items-center w-fit shadow-primario/10 shadow-xl">
           <Movie movie={movie} />
           <MovieData platforms={platforms} movie={movie} />
           <div className="flex flex-col md:flex-row gap-10 p-5 justify-center w-full ">

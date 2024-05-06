@@ -2,7 +2,7 @@ import React from "react";
 
 export const MovieData = ({ movie, platforms }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-10 p-5 ">
+    <div className="flex flex-col md:flex-row gap-10 p-5 w-full">
       <div className="flex flex-col gap-4">
         <div className="w-96 md:flex md:flex-col grid grid-cols-2 items-center md:items-start gap-4">
           {movie.info.map((info) => (

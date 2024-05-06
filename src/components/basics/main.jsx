@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <MoviePage />,
   },
   {
-    path: "/miLista",
+    path: "/mi-lista",
     element: <MiLista/>,
   },
 ]);

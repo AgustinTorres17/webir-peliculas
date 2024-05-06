@@ -49,7 +49,7 @@ export const Header = () => {
             </span>
           </Link>
           <Link
-            to="/miLista"
+            to="/mi-lista"
             className="hover:text-accent  transition-all ease-in no-underline text-fuente"
           >
             <FaList className="sm:hidden" />

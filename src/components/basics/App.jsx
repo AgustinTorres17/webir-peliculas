@@ -16,7 +16,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/movie" element={<MoviePage />} />
-          <Route path="/miLista" component={<MiLista/>} />
+          <Route path="/mi-lista" component={<MiLista/>} />
         </Routes>
     </>
   );

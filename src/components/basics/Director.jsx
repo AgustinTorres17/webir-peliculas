@@ -9,7 +9,7 @@ export const Director = ({ directors }) => {
         <h2 className="text-accent text-xl font-semibold">Directores</h2>
       )}
 
-      <div className="flex gap-5 justify-start">
+      <div className="flex gap-5 justify-center lg:justify-start">
         {directors.map((director) => (
           <div key={director.name} className="flex flex-col items-start text-center  gap-2">
             <img

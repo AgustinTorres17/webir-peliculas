@@ -2,9 +2,9 @@ import React from "react";
 
 export const Reparto = ({ reparto }) => {
   return (
-    <div className="flex flex-col items-center md:items-start gap-2 w-full ">
+    <div className="flex flex-col items-center lg:items-start gap-2 w-full">
       <h2 className="text-accent text-xl font-semibold">Reparto</h2>
-      <div className="grid grid-cols-3 gap-4 md:gap-y-4 justify-items-start">
+      <div className="grid grid-cols-3 gap-4 lg:gap-y-4 justify-items-start">
         {reparto.map((actor) => (
           <div key={actor.name} className="flex flex-col items-center">
             <img

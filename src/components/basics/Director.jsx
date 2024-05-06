@@ -2,7 +2,7 @@ import React from "react";
 
 export const Director = ({ directors }) => {
   return (
-    <div className="flex flex-col items-center md:items-start gap-2 w-96">
+    <div className="flex flex-col items-center lg:items-start gap-2 w-full lg:w-72">
       {directors.length === 1 ? (
         <h2 className="text-accent text-xl font-semibold">Director</h2>
       ) : (

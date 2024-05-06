@@ -4,9 +4,9 @@ import { FaPlusCircle } from "react-icons/fa";
 import { MdMovieCreation } from "react-icons/md";
 export const Movie = ({ movie }) => {
   return (
-    <div className="flex gap-x-10 flex-col md:flex-row p-5 md:justify-start w-full items-center">
-      <div className="w-full flex flex-col md:flex-row justify-between items-center">
-        <div className="flex h-96  items-start justify-start shadow-md shadow-fuente/5  w-72 md:pt-2">
+    <div className="flex  flex-col lg:flex-row p-5 lg:justify-start w-full items-center">
+      <div className="w-full flex gap-10 flex-col lg:flex-row justify-between items-center">
+        <div className="flex h-96  items-start justify-start shadow-xl shadow-black/50 w-72 md:pt-2">
           {movie.img ? (
             <img
               src={movie.img}

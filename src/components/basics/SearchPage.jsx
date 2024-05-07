@@ -4,11 +4,20 @@ import { Button } from "../ui/button";
 import { Slider } from "../ui/slider";
 import { ComboboxDemo } from '../ui/combobox';
 import "./SearchPage.css";
+import { Link } from 'react-router-dom';
+import MultiRangeSlider from "multi-range-slider-react";
 
 export const SearchPage = () => {
   const [selectedButtons, setSelectedButtons] = useState([]);
   const [showDurationSlider, setShowDurationSlider] = useState(false);
   const [showChapterButtons, setShowChapterButtons] = useState(false);
+
+  const [minValue, set_minValue] = useState(25);
+const [maxValue, set_maxValue] = useState(75);
+const handleInput = (e) => {
+	set_minValue(e.minValue);
+	set_maxValue(e.maxValue);
+};
 
   const handleButtonClick = (buttonName) => {
     const isButtonSelected = selectedButtons.includes(buttonName);
@@ -46,9 +55,18 @@ export const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className='card'>
+  <div style={{ display: 'flex', justifyContent: 'right' }}>
+    <Link
+    to="/">
+    <Button variant="destructive">
+      x
+   </Button>
+    </Link>
+  </div>
+
       <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Tipo</h1>
+        <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Tipo</h1>
         <Button 
           variant="secondary" 
           className={`mr-4 ${selectedButtons.includes("Películas") ? "selected" : ""}`} 
@@ -71,11 +89,11 @@ export const SearchPage = () => {
           Animes
         </Button>
       </div>
-      <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Generos</h1>
+      <div style={{ marginTop: '1rem' }}>
+        <h1 className=" text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Generos</h1>
         <Button 
           variant="secondary" 
-          className={`mr-4 ${selectedButtons.includes("Accion") ? "selected" : ""}`} 
+          className={`mr-4 ${selectedButtons.includes("Accion") ? "selected" : ""}` } 
           onClick={() => handleButtonClick("Accion")}
         >
           Accion
@@ -130,49 +148,72 @@ export const SearchPage = () => {
           Documental
           </Button>
       </div>
-      <div>
-          <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de año de estreno</h1>
-          <Slider variant="default" >Año</Slider>
-        </div>
-      {showDurationSlider && (
-        <div>
-          <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de duración de película</h1>
-          <Slider variant="default" >Minutos</Slider>
-        </div>
-      )}
-      {showChapterButtons && (
-      <div>
-      <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Cantidad de capítulos</h1>
-      <Button 
-        variant="secondary" 
-        className={`mr-4 ${selectedButtons.includes("1-8") ? "selected" : ""}`} 
-        onClick={() => handleButtonClick("1-8")}
-      >
-        1-8
-      </Button>
-      <Button 
-        variant="secondary" 
-        className={`mr-4 ${selectedButtons.includes("8-40") ? "selected" : ""}`} 
-        onClick={() => handleButtonClick("8-40")}
-      >
-        8-40
-      </Button>
-      <Button 
-        variant="secondary" 
-        className={`mr-4 ${selectedButtons.includes("40 +") ? "selected" : ""}`} 
-        onClick={() => handleButtonClick("40 +")}
-      >
-        40 +
-      </Button>
-    </div>
-      )}
-      <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Actores</h1>
+        <div style={{ marginTop: '1rem' }}>
+            <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Rango de año de estreno</h1>
+            <MultiRangeSlider
+			    min={1950}
+            max={2024}
+            step={5}
+            minValue={minValue}
+            maxValue={maxValue}
+            onInput={(e) => {
+              handleInput(e);
+            }}
+          />
+          </div>
+        {showDurationSlider && (
+          <div style={{ marginTop: '1rem' }}>
+            <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Rango de duración de película</h1>
+            <MultiRangeSlider
+			    min={0}
+            max={300}
+            step={5}
+            minValue={minValue}
+            maxValue={maxValue}
+            onInput={(e) => {
+              handleInput(e);
+            }}
+          />
+          </div>
+        )}
+        {showChapterButtons && (
+        <div style={{ marginTop: '1rem' }}>
+        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Cantidad de capítulos</h1>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("1-8") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("1-8")}
+        >
+          1-8
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("8-40") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("8-40")}
+        >
+          8-40
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("40 +") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("40 +")}
+        >
+          40 +
+        </Button>
+      </div>
+        )}
+      <div style={{ marginTop: '1rem' }}>
+        <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Actores</h1>
         <ComboboxDemo variant="default" ></ComboboxDemo>
       </div>
-      <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Títulos Similares</h1>
+      <div style={{ marginTop: '1rem' }}>
+        <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Títulos Similares</h1>
         <ComboboxDemo variant="default" >Títulos</ComboboxDemo>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Button variant="Search" >
+        Buscar
+      </Button>
       </div>
     </div>
   )

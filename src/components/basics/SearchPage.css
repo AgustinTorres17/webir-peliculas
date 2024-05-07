@@ -3,3 +3,18 @@
     color: black; 
     border: 3px solid darkgray; 
 }
+
+.card {
+    display: flex;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    margin-top: 1cm;
+    flex-direction: column;
+    justify-content: center; /* Centrar verticalmente */
+    border-radius: 10px; 
+    /* Valor alto para redondear las esquinas */
+    overflow: hidden; 
+    border-color: rgb(199 203 7 / var(--tw-text-opacity));
+    border-width: 1px;
+    padding: 20px;
+}

@@ -21,8 +21,8 @@
 
 @media screen and (max-width: 768px) {
     .fotoSemanal {
-        width: 100%;
-        height: auto;
+        width: 70%;
+        height: 80%;
     }
 
     .Info {

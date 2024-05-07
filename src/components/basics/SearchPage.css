@@ -1,0 +1,5 @@
+.selected {
+    background-color: rgb(199 203 7 / var(--tw-text-opacity)); 
+    color: black; 
+    border: 3px solid darkgray; 
+}

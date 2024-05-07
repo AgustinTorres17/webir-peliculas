@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Header } from './Header';
 import { Button } from "../ui/button";
 import { Slider } from "../ui/slider";
@@ -6,40 +6,166 @@ import { ComboboxDemo } from '../ui/combobox';
 import "./SearchPage.css";
 
 export const SearchPage = () => {
+  const [selectedButtons, setSelectedButtons] = useState([]);
+  const [showDurationSlider, setShowDurationSlider] = useState(false);
+  const [showChapterButtons, setShowChapterButtons] = useState(false);
+
+  const handleButtonClick = (buttonName) => {
+    const isButtonSelected = selectedButtons.includes(buttonName);
+  
+    setSelectedButtons(prevSelected => {
+      if (isButtonSelected) {
+        return prevSelected.filter((btn) => btn !== buttonName);
+      } else {
+        return [...prevSelected, buttonName];
+      }
+    });
+  
+    if (buttonName === "Películas") {
+      setShowDurationSlider(true);
+    } 
+
+    // Mostrar los botones de cantidad de capítulos si se selecciona "Series" o "Animes"
+    if (buttonName === "Series" || buttonName === "Animes") {
+      setShowChapterButtons(true);
+    } 
+    // Ocultar el slider de duración si se deselecciona "Películas"
+    if (buttonName === "Películas" && isButtonSelected) {
+      setShowDurationSlider(false);
+    } 
+  
+    // Ocultar los botones de cantidad de capítulos si se deselecciona "Series" o "Animes"
+    if ((buttonName === "Series" || buttonName === "Animes") && isButtonSelected) {
+      if (selectedButtons.includes("Series") && buttonName === "Series" && !selectedButtons.includes("Animes")) {
+        setShowChapterButtons(false);
+      }
+      else if (selectedButtons.includes("Animes") && buttonName === "Animes" && !selectedButtons.includes("Series")) {
+        setShowChapterButtons(false);
+      }
+    } 
+  };
 
   return (
     <div>
       <div>
         <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Tipo</h1>
-        <Button variant="secondary" className="mr-4">Películas</Button>
-        <Button variant="secondary" className="mr-4">Series</Button>
-        <Button variant="secondary" className="mr-4">Animes</Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Películas") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Películas")}
+        >
+          Películas
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Series") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Series")}
+        >
+          Series
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Animes") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Animes")}
+        >
+          Animes
+        </Button>
       </div>
       <div>
         <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Generos</h1>
-        <Button variant="secondary" className="mr-4">Accion</Button>
-        <Button variant="secondary" className="mr-4">Drama</Button>
-        <Button variant="secondary" className="mr-4">Suspenso</Button>
-        <Button variant="secondary" className="mr-4">Comedia</Button>
-        <Button variant="secondary" className="mr-4">Infantil</Button>
-        <Button variant="secondary" className="mr-4">Familiar</Button>
-        <Button variant="secondary" className="mr-4">Terror</Button>
-        <Button variant="secondary" className="mr-4">Documental</Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Accion") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Accion")}
+        >
+          Accion
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Drama") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Drama")}
+        >
+          Drama
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Suspenso") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Suspenso")}
+        >
+          Suspenso
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Comedia") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Comedia")}
+        >
+          Comedia
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Infantil") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Infantil")}
+        >
+          Infantil
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Familiar") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Familiar")}
+        >
+          Familiar
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Terror") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Terror")}
+        >
+          Terror
+        </Button>
+        <Button 
+          variant="secondary" 
+          className={`mr-4 ${selectedButtons.includes("Documental") ? "selected" : ""}`} 
+          onClick={() => handleButtonClick("Documental")}
+        >
+          Documental
+          </Button>
       </div>
       <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de años de estreno</h1>
-        <Slider variant="default" >Años</Slider>
-      </div>
+          <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de año de estreno</h1>
+          <Slider variant="default" >Año</Slider>
+        </div>
+      {showDurationSlider && (
+        <div>
+          <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de duración de película</h1>
+          <Slider variant="default" >Minutos</Slider>
+        </div>
+      )}
+      {showChapterButtons && (
       <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Rango de duración de película</h1>
-        <Slider variant="default" >Años</Slider>
-      </div>
-      <div>
-        <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Cantidad de capítulos</h1>
-        <Button variant="secondary" className="mr-4">1-8</Button>
-        <Button variant="secondary" className="mr-4">8-40</Button>
-        <Button variant="secondary" className="mr-4">40 +</Button>
-      </div>
+      <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Cantidad de capítulos</h1>
+      <Button 
+        variant="secondary" 
+        className={`mr-4 ${selectedButtons.includes("1-8") ? "selected" : ""}`} 
+        onClick={() => handleButtonClick("1-8")}
+      >
+        1-8
+      </Button>
+      <Button 
+        variant="secondary" 
+        className={`mr-4 ${selectedButtons.includes("8-40") ? "selected" : ""}`} 
+        onClick={() => handleButtonClick("8-40")}
+      >
+        8-40
+      </Button>
+      <Button 
+        variant="secondary" 
+        className={`mr-4 ${selectedButtons.includes("40 +") ? "selected" : ""}`} 
+        onClick={() => handleButtonClick("40 +")}
+      >
+        40 +
+      </Button>
+    </div>
+      )}
       <div>
         <h1 className="text-white lg:text-start pr-11 text-center lg:m-5">Actores</h1>
         <ComboboxDemo variant="default" ></ComboboxDemo>
@@ -51,3 +177,4 @@ export const SearchPage = () => {
     </div>
   )
 }
+

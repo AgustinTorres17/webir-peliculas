@@ -4,6 +4,7 @@ import { Slider } from "./Slider";
 import { SemanalMovie } from "./SemanalMovie";
 import { Carousel } from "./Carousel";
 
+import "./Carousel.css";
 import { useEffect, useState } from "react";
 export const Home = () => {
   const images = [
@@ -11,55 +12,43 @@ export const Home = () => {
     "https://images8.alphacoders.com/133/1335152.jpg",
     "https://wallpapercave.com/wp/wp10578910.jpg",
   ];
-  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     if (!(window.innerWidth > 1023)) {
-      setOpacity(1);
     }
   }, []);
 
   window.addEventListener("scroll", () => {
     // check if is tablet or desktop
     const isTabletOrDesktop = window.innerWidth > 1023;
-    const carouselHomeContainer = document.querySelector(
-      "#carousel-homepage-container"
+    if (!isTabletOrDesktop) return;
+    const carouselHomeTransitioner = document.querySelector(
+      "#carousel-homepage-transitioner"
     );
-    const carouselHome = document.querySelector("#carousel-homepage");
 
-    if (!isTabletOrDesktop) {
-      setOpacity(1);
-      carouselHome.classList.remove("carousel");
-      carouselHomeContainer.classList.remove("carousel-scroll");
-      return;
-    }
-
-    if (window.scrollY > 10 && isTabletOrDesktop) {
-      let newOpacity = window.scrollY / 400;
-      if (newOpacity > 1) newOpacity = 1;
-      setOpacity(newOpacity);
-      if (carouselHome && !carouselHome.classList.contains("carousel") && window.scrollY > 100)
-        carouselHome.classList.add("carousel");
-      carouselHomeContainer.classList.add("carousel-scroll");
-    }
-    if (window.scrollY < 10 || !isTabletOrDesktop) {
-      carouselHome.classList.remove("carousel");
-      carouselHomeContainer.classList.remove("carousel-scroll");
+    if (window.scrollY > 0) {
+      carouselHomeTransitioner.style.visibility = "visible";
+      carouselHomeTransitioner.style.opacity = 1;
+    } else if (window.scrollY === 0) {
+      carouselHomeTransitioner.style.opacity = 0;
+      setTimeout(() => {
+        carouselHomeTransitioner.style.visibility = "hidden";
+      }, 400);
     }
   });
   return (
-    <div className="w-full p-0 m-0 bg-fondo flex items-center flex-col">
+    <div className="w-full p-0 m-0 bg-fondo flex items-center flex-col carousel">
       <Header />
-      <div
-        id="carousel-homepage-container"
-        className="fade-in-anim transition duration-500 ease-in-out"
-      >
+      <div className="fade-in-anim transition duration-300 ease-in-out relative">
+        <div
+          id="carousel-homepage-transitioner"
+          className="absolute inset-0 transitioner z-10"
+        ></div>
         <Carousel slides={images} />
       </div>
       <div
         id="homepage-main-content"
         className="w-full md:fade-in-anim z-10 px-2"
-        style={{ opacity: opacity }}
       >
         <div className="space-y-4 mt-6 md:mt-0">
           <div className="space-y-2">

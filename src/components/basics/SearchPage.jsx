@@ -19,6 +19,13 @@ const handleInput = (e) => {
 	set_maxValue(e.maxValue);
 };
 
+const [minValue2, set_minValue2] = useState(25);
+const [maxValue2, set_maxValue2] = useState(75);
+const handleInput2 = (e) => {
+	set_minValue(e.minValue);
+	set_maxValue(e.maxValue);
+};
+
   const handleButtonClick = (buttonName) => {
     const isButtonSelected = selectedButtons.includes(buttonName);
   
@@ -168,10 +175,10 @@ const handleInput = (e) => {
 			    min={0}
             max={300}
             step={5}
-            minValue={minValue}
-            maxValue={maxValue}
-            onInput={(e) => {
-              handleInput(e);
+            minValue2={minValue2}
+            maxValue2={maxValue2}
+            onInput2={(e) => {
+              handleInput2(e);
             }}
           />
           </div>

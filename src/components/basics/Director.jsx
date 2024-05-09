@@ -11,13 +11,13 @@ export const Director = ({ directors }) => {
 
       <div className="flex gap-5 justify-center lg:justify-start">
         {directors.map((director) => (
-          <div key={director.name} className="flex flex-col items-start text-center  gap-2">
+          <div key={director.name} className="flex flex-col items-center gap-2 text-fuente hover:text-accent text-center md:items-start md:text-start transition-all duration-300">
             <img
               src={director.img}
               alt={director.name}
               className="w-24 h-24 object-cover rounded-xl"
             />
-            <p className="text-fuente w-28 font-medium text-pretty">{director.name}</p>
+            <p className=" w-28 font-medium text-pretty">{director.name}</p>
           </div>
         ))}
       </div>

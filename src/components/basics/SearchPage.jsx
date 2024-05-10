@@ -6,6 +6,7 @@ import { ComboboxDemo } from '../ui/combobox';
 import "./SearchPage.css";
 import { Link } from 'react-router-dom';
 import MultiRangeSlider from "multi-range-slider-react";
+import "../App.css"
 
 export const SearchPage = () => {
   const [selectedButtons, setSelectedButtons] = useState([]);

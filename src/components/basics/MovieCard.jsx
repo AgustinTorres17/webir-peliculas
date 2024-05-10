@@ -2,39 +2,23 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { GenreContext } from "./GenreContext";
 
 export const MovieCard = ({ title, genre, year, imageUrl }) => {
-  const [genres, setGenres] = useState([]);
-  const [genresNamesStr, setGenresNamesStr] = useState("");
-  useEffect(() => {
-    if (!genre) return;
-    fetchGenres();
-  }, []);
-
-  useEffect(() => {
-    if (genres.length > 0) {
-      getGenresName();
-    }
-  }, [genres]);
-
-  const fetchGenres = async () => {
-    const res = await fetch(`http://localhost:3000/genres`);
-    const data = await res.json();
-    setGenres(data.genres);
-  };
-
-  const getGenresName = () => {
-    const genresNames = [];
-    genre.forEach((id) => {
-      genres.forEach((genre) => {
-        if (genre.id === id) {
-          genresNames.push(genre.name);
-        }
-      });
+  const {genres} = useContext(GenreContext);
+  
+  const getMovieGenresName = () => {
+    const movieGenres = [];
+    genre.forEach((genreId) => {
+      const genreName = genres.find((genre) => genre.id === genreId);
+      movieGenres.push(genreName?.name);
     });
-    setGenresNamesStr(genresNames.join(", "));
-  };
+    return movieGenres.join(", ");
+  }
+
+
+
   return (
     <div className="relative overflow-hidden aspect-[9/16]">
       <img
@@ -48,7 +32,9 @@ export const MovieCard = ({ title, genre, year, imageUrl }) => {
           {title} ({year})
         </h2>
         <p className="md:text-sm text-white text-opacity-50 hidden md:block">
-          {genresNamesStr}
+          {genres
+            ? getMovieGenresName().toString()
+            : "Cargando géneros..."}
         </p>
         <div className="w-full pb-1 flex  justify-center">
           <Link to="/movie">

@@ -7,17 +7,18 @@ import {
 import { MovieCard } from "./MovieCard";
 
 export const Slider = ({ movies }) => {
+  
   return (
     <Carousel>
       <CarouselContent className="flex gap-4 cursor-grab justify-start">
         {movies.map((movie, index) => (
           <CarouselItem className="basis-auto pl-0" key={index}>
-            <div className="w-48 md:w-72 ">
+            <div className="w-32 md:w-52 ">
               <MovieCard
                 title={movie.title}
-                genre={movie.genre}
-                year={movie.year}
-                imageUrl={movie.imageUrl}
+                genre={movie.genre_ids}
+                year={movie.release_date}
+                imageUrl={"http://image.tmdb.org/t/p/w500/" + movie.poster_path}
               />
             </div>
           </CarouselItem>

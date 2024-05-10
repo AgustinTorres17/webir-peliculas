@@ -3,6 +3,8 @@ import { Button } from "../ui/button";
 import { FaPlusCircle } from "react-icons/fa";
 import { MdMovieCreation } from "react-icons/md";
 export const Movie = ({ movie }) => {
+
+  
   return (
     <div className="flex  flex-col lg:flex-row p-5 lg:justify-start w-full items-center">
       <div className="w-full flex gap-10 flex-col lg:flex-row justify-between items-center">

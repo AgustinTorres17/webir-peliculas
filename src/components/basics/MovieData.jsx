@@ -20,16 +20,16 @@ export const MovieData = ({ movie, platforms }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center lg:items-start gap-2">
+      <div className="flex flex-col text-center lg:items-start items-center gap-2">
         <h2 className="text-xl font-medium text-accent">
           Puedes verla en estas plataformas
         </h2>
-        <div className="grid grid-cols-3 gap-3 lg:flex lg:gap-x-10">
+        <div className="grid grid-cols-3 gap-2 justify-items-start md:flex md:gap-x-4 md:justify-center">
           {platforms &&
             platforms.map((platform) => (
               <div
                 key={platform.name}
-                className="h-24 w-24 rounded-lg overflow-hidden shadow-xl  hover:scale-110 hover:cursor-pointer hover:shadow-xl"
+                className="h-20 w-20 md:h-24 md:w-24 rounded-lg overflow-hidden shadow-xl flex justify-center hover:scale-110 hover:cursor-pointer hover:shadow-xl transition-all duration-300"
               >
                 <img
                   src={`${platform.logo}`}

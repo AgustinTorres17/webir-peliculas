@@ -95,8 +95,8 @@ export const Header = () => {
           <FaSearchPlus className="sm:hidden" />
         </Link>
       </div>
-      <div className="flex gap-2 max-w-48 md:max-w-72">
-        <Input placeholder="Buscar" className="" />
+      <div className="flex gap-2">
+        <Input placeholder="Buscar" className="w-28" />
         <Button variant="default">
           <FaSearch />
         </Button>

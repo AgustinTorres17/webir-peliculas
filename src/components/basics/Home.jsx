@@ -26,10 +26,10 @@ export const Home = () => {
       "#carousel-homepage-transitioner"
     );
 
-    if (window.scrollY > 0) {
+    if (window.scrollY > 0 && carouselHomeTransitioner) {
       carouselHomeTransitioner.style.visibility = "visible";
       carouselHomeTransitioner.style.opacity = 1;
-    } else if (window.scrollY === 0) {
+    } else if (window.scrollY === 0 && carouselHomeTransitioner) {
       carouselHomeTransitioner.style.opacity = 0;
       setTimeout(() => {
         carouselHomeTransitioner.style.visibility = "hidden";

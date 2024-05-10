@@ -25,13 +25,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/mi-lista",
-    element: <MiLista/>,
+    element: <MiLista />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+
     <div className="py-4 invisible"></div>
   </React.StrictMode>
 );

@@ -6,7 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import { GenreContext } from "./GenreContext";
 
 export const MovieCard = ({ title, genre, year, imageUrl }) => {
-  const {genres} = useContext(GenreContext);
+  const { genres } = useContext(GenreContext);
   
   const getMovieGenresName = () => {
     const movieGenres = [];

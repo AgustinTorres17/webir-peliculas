@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Slider } from "./Slider";
 import { SemanalMovie } from "./SemanalMovie";
 import { Carousel } from "./Carousel";
-import { GenreProvider } from "./GenreContext";
+
 
 import "./Carousel.css";
 import { useEffect, useState } from "react";
@@ -54,7 +54,7 @@ export const Home = () => {
     }
   });
   return (
-    <GenreProvider>
+    
       <div className="w-full p-0 m-0 bg-fondo flex items-center flex-col carousel">
         <Header />
         <div className="fade-in-anim transition duration-300 ease-in-out relative">
@@ -96,6 +96,5 @@ export const Home = () => {
         </section>
         <div className="h-6"></div>
       </div>
-    </GenreProvider>
   );
 };

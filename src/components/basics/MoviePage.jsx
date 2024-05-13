@@ -5,9 +5,61 @@ import { Director } from "./Director";
 import { MovieData } from "./MovieData";
 import "../App.css";
 import { Header } from "./Header";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const MoviePage = () => {
-  const movie = {
+  const { movieTitle } = useParams();
+  const [movie, setMovie] = useState([]);
+  const [cast, setCast] = useState([]);
+
+
+  console.log(movie);
+  console.log(cast);
+
+
+  useEffect(() => {
+    fetchMovie(movieTitle);
+  }, []);
+
+  const fetchMovie = async (movieTitle) => {
+    try {
+      const response = await fetch(`http://localhost:3000/movie?movieTitle=${movieTitle}`);
+      if (!response.ok) {
+        throw new Error("Error al obtener detalles de la película");
+      }
+      const data = await response.json();
+      setMovie(data);
+    } catch (error) {
+      console.error("Error al obtener detalles de la película:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (movie.results) {
+      fetchCast(movie.results[0].id);
+    }
+  }, [movie]);
+
+  const fetchCast = async (movieId) => {
+    try { 
+      const response = await fetch(`http://localhost:3000/cast?movieId=${movieId}`);
+      if (!response.ok) {
+        throw new Error("Error al obtener el reparto de la película");
+      }
+      const data = await response.json();
+      setCast(data);
+    } catch (error) {
+      console.error("Error al obtener el reparto de la película:", error);
+    }
+  };
+
+
+
+
+
+
+  const movie1 = {
     img: "https://4kwallpapers.com/images/wallpapers/avatar-the-last-3840x2160-13576.jpg",
     title: "Avatar",
     description:
@@ -55,6 +107,7 @@ export const MoviePage = () => {
     ],
   };
 
+
   const platforms = [
     {
       name: "Netflix",
@@ -81,9 +134,9 @@ export const MoviePage = () => {
           <MovieData platforms={platforms} movie={movie} />
           <div className="flex flex-col lg:flex-row gap-10 p-5 justify-start w-full">
             <div className="w-full lg:w-72">
-              <Reparto reparto={movie.cast} />
+              <Reparto reparto={cast} />
             </div>
-            <Director directors={movie.directors} />
+            <Director directors={cast} />
           </div>
         </main>
       </div>

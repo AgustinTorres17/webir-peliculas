@@ -7,7 +7,7 @@ import { GenreContext } from "./GenreContext";
 
 export const MovieCard = ({ title, genre, year, imageUrl }) => {
   const { genres } = useContext(GenreContext);
-  
+
   const getMovieGenresName = () => {
     const movieGenres = [];
     genre.forEach((genreId) => {
@@ -37,7 +37,7 @@ export const MovieCard = ({ title, genre, year, imageUrl }) => {
             : "Cargando géneros..."}
         </p>
         <div className="w-full pb-1 flex  justify-center">
-          <Link to="/movie">
+          <Link to={`/movie/${encodeURIComponent(title)}`}>
             <Button variant="default">Ver Detalles</Button>
           </Link>
           <Button variant="favedMovie" className="ml-5 hidden md:block">

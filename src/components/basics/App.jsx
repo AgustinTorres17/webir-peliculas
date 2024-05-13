@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="*" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/movie" element={<MoviePage />} />
+          <Route path="/movie/:movieTitle" element={<MoviePage />} />
           <Route path="/mi-lista" component={<MiLista />} />
         </Routes>
       </GenreProvider>

@@ -12,10 +12,7 @@ export const MoviePage = () => {
   const { movieTitle } = useParams();
   const [movie, setMovie] = useState([]);
   const [cast, setCast] = useState([]);
-
-
-  console.log(movie);
-  console.log(cast);
+  const [providers, setProviders] = useState([]);
 
 
   useEffect(() => {
@@ -38,6 +35,7 @@ export const MoviePage = () => {
   useEffect(() => {
     if (movie.results) {
       fetchCast(movie.results[0].id);
+      fetchProviders(movie.results[0].id);
     }
   }, [movie]);
 
@@ -54,57 +52,17 @@ export const MoviePage = () => {
     }
   };
 
-
-
-
-
-
-  const movie1 = {
-    img: "https://4kwallpapers.com/images/wallpapers/avatar-the-last-3840x2160-13576.jpg",
-    title: "Avatar",
-    description:
-      "Avatar: La leyenda de Aang es una serie animada de televisión que se emitió en Nickelodeon de 2005 a 2008. La serie se centra en el viaje de Aang, un Avatar de 12 años y último superviviente de los Nómadas del Aire, y sus amigos mientras intentan poner fin a la guerra de la Nación del Fuego contra las otras naciones del mundo.",
-    isFav: false,
-    info: [
-      {
-        content: "9.2",
-        title: "Calificacion",
-      },
-      { content: "3 temporadas", title: "Duracion" },
-    ],
-    genres: ["Aventura", "Fantasia", "Accion"],
-    cast: [
-      {
-        name: "Aang",
-        img: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/avatar-the-last-airbender/b/b0/Aang_img.jpg",
-      },
-      {
-        name: "Katara",
-        img: "https://i.pinimg.com/564x/6b/b4/bd/6bb4bd2f43fc2b985850a81cdea2ba71.jpg",
-      },
-      {
-        name: "Sokka",
-        img: "https://i.pinimg.com/736x/a3/54/56/a35456dc1fd62d895fae07b0bc0f1d8a.jpg",
-      },
-      {
-        name: "Zuko",
-        img: "https://cdn.staticneo.com/w/avatar/thumb/Zuko.JPG/250px-Zuko.JPG",
-      },
-      {
-        name: "Iroh",
-        img: "https://www.yaconic.com/wp-content/uploads/2019/07/Avatar-Tio-Iroh.webp",
-      },
-    ],
-    directors: [
-      {
-        name: "Michael Dante DiMartino",
-        img: "https://facts.net/wp-content/uploads/2023/10/16-mind-blowing-facts-about-michael-dante-dimartino-1698576595.jpg",
-      },
-      {
-        name: "Bryan Konietzko",
-        img: "https://play-lh.googleusercontent.com/jygpYr6aI4DlBwMnUHCkdkupo9rXeEZV1XsCsUGB3EElPpVkZCxypUXDtw3HHBSgWA=w3840-h2160-rw",
-      },
-    ],
+  const fetchProviders = async (movieId) => {
+    try { 
+      const response = await fetch(`http://localhost:3000/providers?movieId=${movieId}`);
+      if (!response.ok) {
+        throw new Error("Error al obtener el reparto de la película");
+      }
+      const data = await response.json();
+      setProviders(data);
+    } catch (error) {
+      console.error("Error al obtener el reparto de la película:", error);
+    }
   };
 
 
@@ -131,7 +89,7 @@ export const MoviePage = () => {
       <div className="w-full bg-fondo flex justify-center ">
         <main className="bg-gradient-to-t from-fondo-claro/20 via-fondo to-fondo-claro/20 flex flex-col gap-5 md:justify-center md:items-center lg:w-fit w-[70%] shadow-primario/10 shadow-xl">
           <Movie movie={movie} />
-          <MovieData platforms={platforms} movie={movie} />
+          <MovieData providers={providers} movie={movie} />
           <div className="flex flex-col lg:flex-row gap-10 p-5 justify-start w-full">
             <div className="w-full lg:w-72">
               <Reparto reparto={cast} />

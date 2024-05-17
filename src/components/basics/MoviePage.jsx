@@ -33,7 +33,7 @@ export const MoviePage = () => {
     }
   };
 
-  const fetchSerie = async (serieTitle) => {
+/*   const fetchSerie = async (serieTitle) => {
     try {
       const response = await fetch(`https://webir-backend.onrender.com/movie?serieTitle=${serieTitle}&type=tv`);
       if (!response.ok) {
@@ -44,7 +44,7 @@ export const MoviePage = () => {
     } catch (error) {
       console.error("Error al obtener detalles de la serie:", error);
     }
-  }
+  } */
 
   useEffect(() => {
     if (movie.results) {

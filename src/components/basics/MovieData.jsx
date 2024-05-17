@@ -48,7 +48,7 @@ export const MovieData = ({ movie, providers }) => {
         </h2>
         <div className="grid grid-cols-3 gap-2 md:flex md:gap-x-4 md:justify-items-center">
           {(providers && providers.results && providers.results?.UY) ? (
-            providers.results?.UY.flatrate.map((platform, index) => (
+            providers.results?.UY.flatrate?.map((platform, index) => (
               <div
                 key={index}
                 className="h-20 w-20 md:h-24 md:w-24 rounded-lg overflow-hidden shadow-xl flex justify-center hover:scale-110 hover:cursor-pointer hover:shadow-xl transition-all duration-300"

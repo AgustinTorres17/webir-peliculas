@@ -20,7 +20,8 @@ const buttonVariants = cva(
         link: "text-fuente underline-offset-4 hover:underline hover:text-accent",
         favedMovie: "text-fuente bg-accent hover:bg-destructive/80",
         unFavedMovie: "bg-fuente text-fondo hover:text-accent hover:bg-primario",
-        Search: "bg-yellow-300 text-black hover:bg-white hover:text-black mt-2"
+        Search: "bg-yellow-300 text-black hover:bg-white hover:text-black mt-2",
+        Chat: "bg-fondo text-accent hover:bg-fondo/70 rounded",
       },
       size: {
         default: "h-10 px-4 py-2",

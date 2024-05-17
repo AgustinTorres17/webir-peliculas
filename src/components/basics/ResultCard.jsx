@@ -5,25 +5,25 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { GenreContext } from "./GenreContext";
 
-export const MovieCard = ({ title, genre, year, imageUrl }) => {
-  const { genres } = useContext(GenreContext);
+export const ResultCard = ({ title, genre, year, imageUrl }) => {
+/*   const { genres } = useContext(GenreContext);
 
   const getMovieGenresName = () => {
     const movieGenres = [];
-    /* console.log(genre); */
+    console.log(genre);
     genre?.forEach((genreId) => {
       const genreName = genres.find((genre) => genre.id === genreId);
       movieGenres.push(genreName?.name);
     });
     return movieGenres.join(", ");
-  }
+  } */
 
 
 
   return (
-    <div className="relative overflow-hidden aspect-[9/16]">
+    <div className="relative overflow-hidden aspect-[12/16] max-h-96">
       <img
-        className="object-cover h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
+        className="object-cover object-top  h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
         src={imageUrl}
         alt={title}
       />
@@ -32,11 +32,6 @@ export const MovieCard = ({ title, genre, year, imageUrl }) => {
         <h2 className="text-sm md:text-lg font-semibold text-white leading-6">
           {title} ({year})
         </h2>
-        <p className="md:text-sm text-white text-opacity-50 hidden md:block">
-          {genres
-            ? getMovieGenresName().toString()
-            : "Cargando géneros..."}
-        </p>
         <div className="w-full pb-1 flex  justify-center">
           <Link to={`/movie/${encodeURIComponent(title)}`}>
             <Button variant="default">Ver Detalles</Button>

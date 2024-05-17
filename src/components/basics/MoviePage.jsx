@@ -13,7 +13,7 @@ export const MoviePage = () => {
   const [movie, setMovie] = useState([]);
   const [cast, setCast] = useState([]);
   const [providers, setProviders] = useState([]);
-
+  const [isMovie, setIsMovie] = useState(true);
 
   useEffect(() => {
     fetchMovie(movieTitle);
@@ -21,27 +21,41 @@ export const MoviePage = () => {
 
   const fetchMovie = async (movieTitle) => {
     try {
-      const response = await fetch(`http://localhost:3000/movie?movieTitle=${movieTitle}`);
+      const response = await fetch(`https://webir-backend.onrender.com/movie?movieTitle=${movieTitle}&type=movie`);
       if (!response.ok) {
         throw new Error("Error al obtener detalles de la película");
       }
       const data = await response.json();
       setMovie(data);
+      console.log(data);
     } catch (error) {
       console.error("Error al obtener detalles de la película:", error);
     }
   };
 
+  const fetchSerie = async (serieTitle) => {
+    try {
+      const response = await fetch(`https://webir-backend.onrender.com/movie?serieTitle=${serieTitle}&type=tv`);
+      if (!response.ok) {
+        throw new Error("Error al obtener detalles de la serie");
+      }
+      const data = await response.json();
+      setMovie(data);
+    } catch (error) {
+      console.error("Error al obtener detalles de la serie:", error);
+    }
+  }
+
   useEffect(() => {
     if (movie.results) {
-      fetchCast(movie.results[0].id);
-      fetchProviders(movie.results[0].id);
+      fetchCast(movie.results[0]?.id);
+      fetchProviders(movie.results[0]?.id);
     }
   }, [movie]);
 
   const fetchCast = async (movieId) => {
     try { 
-      const response = await fetch(`http://localhost:3000/cast?movieId=${movieId}`);
+      const response = await fetch(`https://webir-backend.onrender.com/cast?movieId=${movieId}`);
       if (!response.ok) {
         throw new Error("Error al obtener el reparto de la película");
       }
@@ -54,7 +68,7 @@ export const MoviePage = () => {
 
   const fetchProviders = async (movieId) => {
     try { 
-      const response = await fetch(`http://localhost:3000/providers?movieId=${movieId}`);
+      const response = await fetch(`https://webir-backend.onrender.com/providers?movieId=${movieId}`);
       if (!response.ok) {
         throw new Error("Error al obtener el reparto de la película");
       }
@@ -66,7 +80,7 @@ export const MoviePage = () => {
   };
 
 
-  const platforms = [
+/*   const platforms = [
     {
       name: "Netflix",
       logo: "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940",
@@ -82,7 +96,7 @@ export const MoviePage = () => {
       logo: "https://www.infobae.com/new-resizer/YkDsvTgYCa5l3MIxr8t2z-ybRvc=/1200x900/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/CH7VJ2UAYJGIRAEMF2VLF5XKBU.png",
       color: "#6387A3",
     },
-  ];
+  ]; */
   return (
     <>
       <Header />

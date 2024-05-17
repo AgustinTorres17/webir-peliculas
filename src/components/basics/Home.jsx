@@ -24,13 +24,13 @@ export const Home = () => {
   }, []);
 
   const fetchPeliculas = async () => {
-    const response = await fetch("http://localhost:3000/movies");
+    const response = await fetch("https://webir-backend.onrender.com/movies");
     const data = await response.json();
     setMovies(data.results);
   };
 
   const fetchSeries = async () => {
-    const response = await fetch("http://localhost:3000/series");
+    const response = await fetch("https://webir-backend.onrender.com/series");
     const data = await response.json();
     setSeries(data.results);
   };

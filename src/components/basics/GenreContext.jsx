@@ -10,7 +10,7 @@ const GenreProvider = ({ children }) => {
   }, []);
 
   const fetchGenres = async () => {
-    const res = await fetch(`http://localhost:3000/genres`);
+    const res = await fetch(`https://webir-backend.onrender.com/genres`);
     const data = await res.json();
     setGenres(data.genres);
   };

@@ -18,7 +18,7 @@ export const Slider = ({ movies }) => {
                 title={movie.title}
                 genre={movie.genre_ids}
                 year={movie.release_date}
-                imageUrl={"http://image.tmdb.org/t/p/w500/" + movie.poster_path}
+                imageUrl={"http://image.tmdb.org/t/p/w500/" + movie?.poster_path}
               />
             </div>
           </CarouselItem>

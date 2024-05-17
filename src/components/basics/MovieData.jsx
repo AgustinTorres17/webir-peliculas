@@ -12,7 +12,7 @@ export const MovieData = ({ movie, providers }) => {
   const getMovieGenresName = () => {
     const movieGenres = [];
     if (movie.results) {
-      movie.results[0].genre_ids.forEach((genreId) => {
+      movie.results[0]?.genre_ids.forEach((genreId) => {
         const genreName = genres.find((genre) => genre.id === genreId);
         movieGenres.push(genreName?.name);
       });
@@ -20,14 +20,15 @@ export const MovieData = ({ movie, providers }) => {
     return movieGenres.join(", ");
   }
 
+  
   return (
     <div className="flex flex-col lg:flex-row gap-10 p-5 w-full">
       <div className="flex flex-col gap-4">
         <div className="w-full grid md:grid-cols-3 grid-cols-2 items-center gap-5 lg:flex lg:flex-col lg:text-start lg:w-72 lg:items-start">
-          {movie.results ? (
+          {movie?.results?.length > 0 ? (
             <div className="text-center lg:text-start">
               <p className="text-fuente">{"Calificacion"}</p>
-              <p className="text-accent">{movie.results[0].vote_average}</p>
+              <p className="text-accent">{movie?.results[0]?.vote_average}</p>
             </div>
 
           ) : ("")}
@@ -41,13 +42,13 @@ export const MovieData = ({ movie, providers }) => {
 
         </div>
       </div>
-      <div className="flex flex-col text-center lg:items-center items-center gap-2">
+      <div className="flex flex-col text-center lg:items-start items-center gap-2 w-full">
         <h2 className="text-xl font-medium text-accent">
           Disponible en
         </h2>
         <div className="grid grid-cols-3 gap-2 md:flex md:gap-x-4 md:justify-items-center">
-          {(providers && providers.results && providers.results.UY) ? (
-            providers.results.UY.flatrate.map((platform, index) => (
+          {(providers && providers.results && providers.results?.UY) ? (
+            providers.results?.UY.flatrate.map((platform, index) => (
               <div
                 key={index}
                 className="h-20 w-20 md:h-24 md:w-24 rounded-lg overflow-hidden shadow-xl flex justify-center hover:scale-110 hover:cursor-pointer hover:shadow-xl transition-all duration-300"
@@ -63,7 +64,7 @@ export const MovieData = ({ movie, providers }) => {
             ))
           ) : (
             <div>
-              <p className="text-white">No disponible en Urguay</p>
+              <p className="text-white">No disponible en Uruguay</p>
             </div>
           )}
         </div>

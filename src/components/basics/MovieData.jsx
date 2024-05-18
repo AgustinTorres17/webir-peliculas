@@ -6,15 +6,14 @@ export const MovieData = ({ movie, providers }) => {
 
   const { genres } = useContext(GenreContext);
 
-  if (providers) { console.log(providers); }
+  /* if (providers) { console.log(providers); } */
 
 
   const getMovieGenresName = () => {
     const movieGenres = [];
-    if (movie.results) {
-      movie.results[0]?.genre_ids.forEach((genreId) => {
-        const genreName = genres.find((genre) => genre.id === genreId);
-        movieGenres.push(genreName?.name);
+    if (movie?.genres?.length > 0) {
+      movie.genres.forEach((genre) => {
+        movieGenres.push(genre.name);
       });
     }
     return movieGenres.join(", ");
@@ -25,10 +24,10 @@ export const MovieData = ({ movie, providers }) => {
     <div className="flex flex-col lg:flex-row gap-10 p-5 w-full">
       <div className="flex flex-col gap-4">
         <div className="w-full grid md:grid-cols-3 grid-cols-2 items-center gap-5 lg:flex lg:flex-col lg:text-start lg:w-72 lg:items-start">
-          {movie?.results?.length > 0 ? (
+          {movie ? (
             <div className="text-center lg:text-start">
               <p className="text-fuente">{"Calificacion"}</p>
-              <p className="text-accent">{movie?.results[0]?.vote_average}</p>
+              <p className="text-accent">{movie.vote_average}</p>
             </div>
 
           ) : ("")}

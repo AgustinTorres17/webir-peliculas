@@ -6,6 +6,7 @@ import { MoviePage } from "./MoviePage";
 import { SearchPage } from "./SearchPage";
 import { Home } from "./Home";
 import { MiLista } from "./MiLista";
+import { SeriesPage } from "./SeriesPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/movie/:movieTitle" element={<MoviePage />} />
+          <Route path="/serie/:serieId" element={<SeriesPage />} />
           <Route path="/mi-lista" component={<MiLista />} />
         </Routes>
       </GenreProvider>

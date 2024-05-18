@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { GenreContext } from "./GenreContext";
 
-export const ResultCard = ({ title, genre, year, imageUrl }) => {
-/*   const { genres } = useContext(GenreContext);
+export const ResultCard = ({ title, genre, year, imageUrl, id, isMovie }) => {
+  /*   const { genres } = useContext(GenreContext);
 
   const getMovieGenresName = () => {
     const movieGenres = [];
@@ -18,8 +18,6 @@ export const ResultCard = ({ title, genre, year, imageUrl }) => {
     return movieGenres.join(", ");
   } */
 
-
-
   return (
     <div className="relative overflow-hidden aspect-[12/16] max-h-96">
       <img
@@ -30,12 +28,18 @@ export const ResultCard = ({ title, genre, year, imageUrl }) => {
       <div className="absolute inset-0 text-center text-pretty bg-black bg-opacity-60 flex flex-col items-center justify-between md:justify-center md:p-4 md:gap-1 opacity-0 hover:opacity-100 active:opacity-100 transition-opacity duration-500">
         <div className="md:hidden"></div>
         <h2 className="text-sm md:text-lg font-semibold text-white leading-6">
-          {title} ({year})
+          {title}
         </h2>
         <div className="w-full pb-1 flex  justify-center">
-          <Link to={`/movie/${encodeURIComponent(title)}`}>
-            <Button variant="default">Ver Detalles</Button>
-          </Link>
+          {isMovie ? (
+            <Link to={`/movie/${encodeURIComponent(id)}`}>
+              <Button variant="default">Ver Detalles</Button>
+            </Link>
+          ) : (
+            <Link to={`/serie/${encodeURIComponent(id)}`}>
+              <Button variant="default">Ver Detalles</Button>
+            </Link>
+          )}
           <Button variant="favedMovie" className="ml-5 hidden md:block">
             <FaPlusCircle></FaPlusCircle>
           </Button>

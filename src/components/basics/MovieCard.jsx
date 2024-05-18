@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { GenreContext } from "./GenreContext";
 
-export const MovieCard = ({ title, genre, year, imageUrl }) => {
+export const MovieCard = ({ title, genre, year, imageUrl, id, isMovie }) => {
   const { genres } = useContext(GenreContext);
 
   const getMovieGenresName = () => {
@@ -38,9 +38,14 @@ export const MovieCard = ({ title, genre, year, imageUrl }) => {
             : "Cargando géneros..."}
         </p>
         <div className="w-full pb-1 flex  justify-center">
-          <Link to={`/movie/${encodeURIComponent(title)}`}>
+          {isMovie ? ( <Link to={`/movie/${id}`}>
             <Button variant="default">Ver Detalles</Button>
-          </Link>
+          </Link>) : (
+            <Link to={`/serie/${id}`}>
+              <Button variant="default">Ver Detalles</Button>
+            </Link>
+          )}
+         
           <Button variant="favedMovie" className="ml-5 hidden md:block">
             <FaPlusCircle></FaPlusCircle>
           </Button>

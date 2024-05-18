@@ -1,7 +1,6 @@
 import React from "react";
 
 export const Reparto = ({ reparto }) => {
-
   return (
     <div className="flex flex-col items-center lg:items-start gap-2 w-full">
       <h2 className="text-accent text-xl font-semibold">Reparto</h2>

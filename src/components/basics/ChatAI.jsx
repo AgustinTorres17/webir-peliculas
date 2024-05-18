@@ -27,7 +27,7 @@ export const ChatAI = () => {
           className="bg-fondo/95 text-fuente rounded-tl-sm rounded-bl-sm shadow-lg w-screen md:w-[55vw] xl:w-[25vw] h-fit fixed bottom-0 right-0 transition-all duration-300"
         >
           <div className="flex flex-col justify-between p-2 h-full w-full relative">
-            <div className="absolute  h-24 w-full flex justify-end items-start z-[1]">
+            <div className="absolute top-0 h-24 w-full flex justify-end items-start z-[1]">
               <Avatar className="" isChat={true}/>
             </div>
             <div className="flex w-full justify-between z-[2]">

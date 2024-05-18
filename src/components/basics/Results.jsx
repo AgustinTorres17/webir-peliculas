@@ -92,7 +92,7 @@ export const Results = () => {
     <main className="flex flex-col w-full">
       <Header />
       {isLoading ? (
-        <section className="h-full flex flex-col items-center">
+        <section className="h-full w-full flex flex-col items-center justify-center">
           <div className="w-96 h-96 flex relative">
             <Avatar />
           </div>

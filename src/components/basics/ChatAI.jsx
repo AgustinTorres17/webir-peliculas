@@ -41,11 +41,11 @@ export const ChatAI = () => {
                 <IoIosCloseCircle />
               </button>
             </div>
-            <p className="mt-4 text-base md:text-lg font-semibold p-2 text-fuente tracking-wide">
+            <p className="mt-4 text-sm md:text-lg font-semibold p-2 text-fuente tracking-wide">
               Hola 👋!
               <br />
               Soy Chaplin, la IA de{" "}
-              <span className="text-accent text-sm md:text-base font-semibold">QuePinta</span>.{" "}
+              <span className="text-accent font-semibold">QuePinta</span>.
               <br /> <br /> Mi trabajo es ayudarte a encontrar la película o
               serie que estás buscando! <br /> <br /> Ten en cuenta que mientras
               más preciso (o precisa) seas, mejores serán mis recomendaciones

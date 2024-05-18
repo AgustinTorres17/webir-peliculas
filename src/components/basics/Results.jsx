@@ -93,7 +93,7 @@ export const Results = () => {
       <Header />
       {isLoading ? (
         <section className="h-full w-full flex flex-col items-center justify-center">
-          <div className="w-96 h-96 flex relative">
+          <div className="w-96 h-96 flex justify-center relative">
             <Avatar />
           </div>
           <h2 className="text-accent font-bold text-2xl text-center m-5">

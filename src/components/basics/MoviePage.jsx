@@ -49,9 +49,6 @@ export const MoviePage = () => {
   const fetchCast = async (movieId) => {
     try { 
       const response = await fetch(`https://webir-backend.onrender.com/movie/cast/${movieId}`);
-      if (!response.ok) {
-        throw new Error("Error al obtener el reparto de la película");
-      }
       const data = await response.json();
       setCast(data);
     } catch (error) {
@@ -61,14 +58,14 @@ export const MoviePage = () => {
 
   const fetchProviders = async (movieId) => {
     try { 
-      const response = await fetch(`https://webir-backend.onrender.com/providers?movieId=${movieId}`);
+      const response = await fetch(`http://localhost:3000/movie-providers?movieId=${movieId}`);
       if (!response.ok) {
         return;
       }
       const data = await response.json();
       setProviders(data);
     } catch (error) {
-      console.error("Error al obtener el reparto de la película:", error);
+      console.error("Error al obtener los proveedeores de la película:", error);
     }
   };
 

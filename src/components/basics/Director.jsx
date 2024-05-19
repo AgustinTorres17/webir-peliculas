@@ -14,7 +14,11 @@ export const Director = ({ directors }) => {
             .map(director => (
               <div key={director.name} className="flex flex-col items-center text-fuente hover:text-accent transition-all duration-300">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500/${director.profile_path}`}
+                 src={director.profile_path 
+                ? `https://image.tmdb.org/t/p/w500/${director.profile_path}` 
+                : director.gender === 1 
+                  ? 'https://st2.depositphotos.com/9998432/48435/v/450/depositphotos_484354136-stock-illustration-default-avatar-photo-placeholder-grey.jpg' 
+                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEgS9SYvmrKjl6dYiGM3YWSXac7J7K32P8V_wxZ0is1g&s'}
                   alt={director.name}
                   className="w-24 h-24 object-cover rounded-xl"
                 />

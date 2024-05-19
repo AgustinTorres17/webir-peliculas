@@ -6,7 +6,8 @@ import { ComboboxDemo } from '../ui/combobox';
 import "./SearchPage.css";
 import { Link } from 'react-router-dom';
 import MultiRangeSlider from "multi-range-slider-react";
-import "../App.css"
+import { Textarea } from "@/components/ui/textarea";
+import "../App.css";
 
 export const SearchPage = () => {
   const [selectedButtons, setSelectedButtons] = useState([]);
@@ -212,16 +213,17 @@ const handleInput2 = (e) => {
         )}
       <div style={{ marginTop: '1rem' }}>
         <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Actores</h1>
-        <ComboboxDemo variant="default" ></ComboboxDemo>
+        <Textarea variant="form" />
       </div>
       <div style={{ marginTop: '1rem' }}>
         <h1 className="text-2xl text-white lg:text-start pr-11 text-center lg:m-5">Títulos Similares</h1>
-        <ComboboxDemo variant="default" >Títulos</ComboboxDemo>
+        <Textarea variant="form" />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Button variant="Search" >
         Buscar
       </Button>
+
       </div>
     </div>
   )

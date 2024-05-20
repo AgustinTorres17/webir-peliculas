@@ -21,7 +21,7 @@ export const ResultCard = ({ title, genre, year, imageUrl, id, isMovie }) => {
   return (
     <div className="relative overflow-hidden aspect-[12/16] max-h-96">
       <img
-        className="object-cover object-top  h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
+        className="object-top h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
         src={imageUrl}
         alt={title}
       />

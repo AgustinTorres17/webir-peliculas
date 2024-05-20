@@ -1,6 +1,7 @@
 .fotoSemanal {
     width: 650px;
     height: 600px;
+    margin-left: 50px; 
 }
 
 .Info {
@@ -24,6 +25,7 @@
     .fotoSemanal {
         width: 70%;
         height: 80%;
+        margin-left: 0px;
     }
 
     .Info {

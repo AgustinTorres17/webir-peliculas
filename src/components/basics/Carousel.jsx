@@ -4,15 +4,34 @@ import "./Carousel.css";
 
 
 export const Carousel = ({ slides }) => {
+
+  let slidesL = 0;
+  let combinedSlides = [];
+
+  if (slides && slides.movies && slides.tvShows) {
+    slidesL = slides.movies.length + slides.tvShows.length;
+    
+    for (let i = 0; i < slidesL/2; i++) {
+      if (i < slides.movies.length) {
+        combinedSlides.push(slides.movies[i]);
+      }
+      if (i < slides.tvShows.length) {
+        combinedSlides.push(slides.tvShows[i]);
+      }
+    }
+
+    console.log(combinedSlides);
+  }
+
   const [curr, setCurr] = useState(0);
   const [startX, setStartX] = useState(0);
   const [offsetX, setOffsetX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
   const prev = () =>
-    setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1));
+    setCurr((curr) => (curr === 0 ? slidesL - 1 : curr - 1));
   const next = () =>
-    setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1));
+    setCurr((curr) => (curr === slidesL - 1 ? 0 : curr + 1));
 
   const handleStart = (clientX) => {
     setIsDragging(true);
@@ -23,6 +42,7 @@ export const Carousel = ({ slides }) => {
     if (!isDragging) return;
     setOffsetX((clientX - startX) * 10); // Multiply offsetX by 2
   };
+
 
   const handleEnd = () => {
     setIsDragging(false);
@@ -49,16 +69,16 @@ export const Carousel = ({ slides }) => {
       <div
         className="relative flex transition-transform duration-500 ease-in-out h-72 lg:h-[calc(100vh-56px)]"
         style={{
-          width: `${slides.length * 100}%`,
+          width: `${slidesL * 100}%`,
           transform: `translateX(calc(-${
-            (curr * 100) / slides.length
+            (curr * 100) / slidesL
           }% + ${offsetX}px))`,
         }}
       >
-        {slides.map((slide, index) => (
+        {combinedSlides.map((slide, index) => (
           <img
             key={index}
-            src={slide}
+            src={"http://image.tmdb.org/t/p/original/" + slide.backdrop_path}
             alt="slide"
             className="overflow-hidden w-screen object-cover object-center fade-bottom"
           />

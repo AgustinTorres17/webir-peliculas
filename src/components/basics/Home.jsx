@@ -12,6 +12,7 @@ import { ChatAI } from "./ChatAI";
 export const Home = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
+  const [populares, setPopulares] = useState([]);
 
   const images = [
     "https://4kwallpapers.com/images/wallpapers/avatar-the-last-3840x2160-13576.jpg",
@@ -22,7 +23,18 @@ export const Home = () => {
   useEffect(() => {
     fetchPeliculas();
     fetchSeries();
+    fetchPopulares();
   }, []);
+
+  const fetchPopulares = async () => { 
+    try {
+      const response = await fetch("http://localhost:3000/popular");
+      const data = await response.json();
+      setPopulares(data);
+    } catch (error) {
+      console.error("Error al obtener las películas populares:", error);
+    }
+  };
 
   const fetchPeliculas = async () => {
     const response = await fetch("https://webir-backend.onrender.com/movies");
@@ -35,6 +47,7 @@ export const Home = () => {
     const data = await response.json();
     setSeries(data.results);
   };
+
 
   window.addEventListener("scroll", () => {
     // check if is tablet or desktop
@@ -63,7 +76,7 @@ export const Home = () => {
           id="carousel-homepage-transitioner"
           className="absolute inset-0 transitioner z-10"
         ></div>
-        <Carousel slides={images} />
+        <Carousel slides={populares} />
       </div>
       <div
         id="homepage-main-content"

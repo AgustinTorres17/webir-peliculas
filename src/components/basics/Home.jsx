@@ -14,12 +14,6 @@ export const Home = () => {
   const [series, setSeries] = useState([]);
   const [populares, setPopulares] = useState([]);
 
-  const images = [
-    "https://4kwallpapers.com/images/wallpapers/avatar-the-last-3840x2160-13576.jpg",
-    "https://images8.alphacoders.com/133/1335152.jpg",
-    "https://wallpapercave.com/wp/wp10578910.jpg",
-  ];
-
   useEffect(() => {
     fetchPeliculas();
     fetchSeries();

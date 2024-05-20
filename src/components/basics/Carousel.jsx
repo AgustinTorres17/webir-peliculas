@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "./Carousel.css";
+import { Button } from "@/components/ui/button";
+import { FaPlusCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 
 
 export const Carousel = ({ slides }) => {
@@ -10,8 +14,8 @@ export const Carousel = ({ slides }) => {
 
   if (slides && slides.movies && slides.tvShows) {
     slidesL = slides.movies.length + slides.tvShows.length;
-    
-    for (let i = 0; i < slidesL/2; i++) {
+
+    for (let i = 0; i < slidesL / 2; i++) {
       if (i < slides.movies.length) {
         combinedSlides.push(slides.movies[i]);
       }
@@ -40,9 +44,8 @@ export const Carousel = ({ slides }) => {
 
   const handleMove = (clientX) => {
     if (!isDragging) return;
-    setOffsetX((clientX - startX) * 10); // Multiply offsetX by 2
+    setOffsetX((clientX - startX) * 10);
   };
-
 
   const handleEnd = () => {
     setIsDragging(false);
@@ -70,36 +73,41 @@ export const Carousel = ({ slides }) => {
         className="relative flex transition-transform duration-500 ease-in-out h-72 lg:h-[calc(100vh-56px)]"
         style={{
           width: `${slidesL * 100}%`,
-          transform: `translateX(calc(-${
-            (curr * 100) / slidesL
-          }% + ${offsetX}px))`,
+          transform: `translateX(calc(-${(curr * 100) / slidesL}% + ${offsetX}px))`,
         }}
       >
         {combinedSlides.map((slide, index) => (
-          <img
-            key={index}
-            src={"http://image.tmdb.org/t/p/original/" + slide.backdrop_path}
-            alt="slide"
-            className="overflow-hidden w-screen object-cover object-center fade-bottom"
-          />
+          <div key={index} className="relative">
+            <img
+              src={"http://image.tmdb.org/t/p/original/" + slide.backdrop_path}
+              alt="slide"
+              className="overflow-hidden w-screen object-cover object-center fade-bottom"
+            />
+            <div className="hidden md:block absolute bottom-4 right-4 z-10">
+              <h1 className="text-4xl text-white font-semibold">{slide.title ? slide.title : slide.name}</h1>
+            </div>
+          </div>
         ))}
       </div>
-      <div className="absolute inset-0 flex items-center justify-between p-4">
+      <div className="absolute z-20 inset-y-0 flex items-center justify-between w-full p-4">
         <button
           onClick={prev}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300 top-1/2 left-4 transform -translate-y-1/2"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }}
           color="secondary"
         >
           <FaArrowLeft />
         </button>
         <button
           onClick={next}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300 top-1/2 right-4 transform -translate-y-1/2"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
           color="secondary"
         >
           <FaArrowRight />
         </button>
       </div>
     </div>
+
   );
 };

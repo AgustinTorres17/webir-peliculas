@@ -4,7 +4,6 @@ import axios from "axios";
 import { Header } from "./Header";
 import { ResultCard } from "./ResultCard";
 import { GenreProvider } from "./GenreContext";
-import { ChatAI } from "./ChatAI";
 import { Avatar } from "./Avatar";
 
 export const Results = () => {
@@ -12,81 +11,89 @@ export const Results = () => {
   const prompt = location.state.prompt || "";
   const [recomendations, setRecomendations] = useState([]);
   const [movies, setMovies] = useState([]);
-  const [hasFetched, setHasFetched] = useState(false);
+  const [validatedMovies, setValidatedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const fetchRecomendations = async () => {
-    if (prompt.length < 10 || hasFetched) return;
-    console.log("Fetching recommendations for prompt:", prompt);
-    try {
-      const res = await axios.post("https://webir-backend.onrender.com/generate", {
-        prompt,
-      });
-      setRecomendations((prev) => [...prev, ...res.data]);
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
-    }
-  };
-
-  /*   useEffect(() => {
-    console.log("Recommendations:", recomendations);
-  }, [recomendations]); */
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
-        if (hasFetched || recomendations.length > 0) return;
-        setHasFetched(true);
-        setIsLoading(true);
-        await fetchRecomendations();
+        const res = await axios.post("http://localhost:3000/generate", {
+          prompt,
+        });
+        setRecomendations(res.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching recommendations:", error);
+      }
+      setIsLoading(false);
+    };
+    fetchData();
+  }, [prompt]);
+
+  useEffect(() => {
+    const fetchMovie = async (movieTitle) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/movie?movieTitle=${encodeURIComponent(
+            movieTitle
+          )}&type=movie`
+        );
+        if (response.data.results.length > 0) {
+          setMovies((prevMovies) => {
+            const newMovies = response.data.results.filter(
+              (movie) =>
+                !prevMovies.some((prevMovie) => prevMovie.id === movie.id)
+            );
+            return [...prevMovies, ...newMovies];
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
       }
     };
 
-    fetchData();
-  }, []);
-
-  /* useEffect(() => {
-    if (prompt.length >= 10 && recomendations.length < 1) {
-      fetchRecomendations();
-    }
-  }, [prompt]); */
-
-  const fetchMovie = async (movieTitle) => {
-    try {
-      const response = await fetch(
-        `https://webir-backend.onrender.com/movie?movieTitle=${encodeURIComponent(
-          movieTitle
-        )}&type=movie`
-      );
-      if (!response.ok) {
-        throw new Error("Error al obtener detalles de la película");
-      }
-      const data = await response.json();
-      if (data.results.length < 1) return;
-
-      setMovies((prevMovies) => {
-        const newMovies = data.results.filter(
-          (movie) => !prevMovies.some((prevMovie) => prevMovie.id === movie.id)
-        );
-        setIsLoading(false);
-        return [...prevMovies, ...newMovies];
-      });
-    } catch (error) {
-      console.error("Error al obtener detalles de la película:", error);
-    }
-  };
-
-  useEffect(() => {
     if (recomendations.length > 0) {
-      recomendations.forEach(async (recomend) => {
-        if (movies.length < 24) {
-          await fetchMovie(recomend);
-        }
+      recomendations.forEach((recomend) => {
+        fetchMovie(recomend);
       });
     }
   }, [recomendations]);
+
+useEffect(() => {
+  const validateMovies = async (moviesToValidate) => {
+    try {
+      const response = await axios.post("http://localhost:3000/validate", {
+        recommendations: moviesToValidate,
+        prompt,
+      });
+      const validatedResults = response.data;
+
+      // Filtrar las películas válidas
+      const validMovieIds = new Set();
+      const newValidatedMovies = moviesToValidate.filter((movie, index) => {
+        if (validatedResults[index]) {
+          if (!validMovieIds.has(movie.id)) {
+            validMovieIds.add(movie.id);
+            return true;
+          }
+          return false;
+        }
+        return false;
+      });
+
+      setValidatedMovies(newValidatedMovies); // Reemplazar las películas validadas por completo
+    } catch (error) {
+      console.error("Error validating movies:", error);
+    }
+  };
+
+  if (movies.length > 0) {
+    validateMovies(movies);
+  }
+}, [movies, prompt]);
+
+
+ 
 
   return (
     <main className="flex flex-col w-full">
@@ -107,17 +114,15 @@ export const Results = () => {
           </h2>
           <div className="grid lg:grid-cols-6 grid-cols-3 w-full h-fit gap-4 justify-items-center">
             <GenreProvider>
-              {movies.length > 0 &&
-                movies.map((movie, index) => (
+              {validatedMovies.length > 0 &&
+                validatedMovies.map((movie, index) => (
                   <ResultCard
                     key={index}
-                    title={movie.title}
-                    year={movie.year}
-                    id={movie.id}
-                    isMovie={movie.name ? false : true}
-                    imageUrl={
-                      "http://image.tmdb.org/t/p/w500/" + movie?.poster_path
-                    }
+                    title={movie?.title}
+                    year={movie?.year}
+                    id={movie?.id}
+                    isMovie={!movie?.name}
+                    imageUrl={`http://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
                   />
                 ))}
             </GenreProvider>

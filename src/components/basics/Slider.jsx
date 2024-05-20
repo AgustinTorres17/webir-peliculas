@@ -11,7 +11,7 @@ export const Slider = ({ movies }) => {
   return (
     <Carousel>
       <CarouselContent className="flex gap-4 cursor-grab justify-start">
-        {movies.map((movie, index) => (
+        {movies ? movies.map((movie, index) => (
           <CarouselItem className="basis-auto pl-0" key={index}>
             <div className="w-32 md:w-52 ">
               <MovieCard
@@ -24,7 +24,7 @@ export const Slider = ({ movies }) => {
               />
             </div>
           </CarouselItem>
-        ))}
+        )) : ("")}
       </CarouselContent>
     </Carousel>
   );

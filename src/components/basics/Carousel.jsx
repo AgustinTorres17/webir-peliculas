@@ -24,7 +24,6 @@ export const Carousel = ({ slides }) => {
       }
     }
 
-    console.log(combinedSlides);
   }
 
   const [curr, setCurr] = useState(0);

@@ -7,9 +7,9 @@ import "./SemanalMovie.css";
 export const SemanalMovie = ({ title, genre, year, imageUrl, description }) => {
     return (
         
-        <div className='px-2  pt-3 lg:flex lg:space-x-20 flex flex-col gap-5 items-center lg:items-start lg:flex-row md:space-y-5 text-center lg:text-start' >
+        <div className='px-2 pt-3 lg:flex lg:space-x-20 flex flex-col gap-5 items-center lg:items-start lg:flex-row md:space-y-5 text-center lg:text-start' >
             <div className="fotoSemanal">
-                <img className='w-full h-full object-cover' src={imageUrl} alt={title} />
+                <img className='w-full h-full' src={imageUrl} alt={title} />
             </div>
             <div className="Info space-y-4">
                 <h2 className='lg:text-4xl text-2xl font-semibold text-accent'>{title} ({year})</h2>

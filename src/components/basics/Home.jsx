@@ -31,7 +31,7 @@ export const Home = () => {
 
   const fetchAccion = async () => {
     try {
-      const response = await fetch("http://localhost:3000/accion");
+      const response = await fetch("https://webir-backend.onrender.com/accion");
       const data = await response.json();
       setAccion(data);
       console.log(data);
@@ -42,7 +42,7 @@ export const Home = () => {
 
   const fetchAventura = async () => {
     try {
-      const response = await fetch("http://localhost:3000/aventura");
+      const response = await fetch("https://webir-backend.onrender.com/aventura");
       const data = await response.json();
       setAventura(data);
       console.log(data);
@@ -53,7 +53,7 @@ export const Home = () => {
 
   const fetchFantasia = async () => {
     try {
-      const response = await fetch("http://localhost:3000/fantasia");
+      const response = await fetch("https://webir-backend.onrender.com/fantasia");
       const data = await response.json();
       setFantasia(data);
       console.log(data);
@@ -64,7 +64,7 @@ export const Home = () => {
   
   const fetchTerror = async () => {
     try {
-      const response = await fetch("http://localhost:3000/terror");
+      const response = await fetch("https://webir-backend.onrender.com/terror");
       const data = await response.json();
       setTerror(data);
       console.log(data);

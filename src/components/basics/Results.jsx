@@ -18,7 +18,7 @@ export const Results = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post("http://localhost:3000/generate", {
+        const res = await axios.post("https://webir-backend.onrender.com/generate", {
           prompt,
         });
         setRecomendations(res.data);
@@ -34,7 +34,7 @@ export const Results = () => {
     const fetchMovie = async (movieTitle) => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/movie?movieTitle=${encodeURIComponent(
+          `https://webir-backend.onrender.com/movie?movieTitle=${encodeURIComponent(
             movieTitle
           )}&type=movie`
         );
@@ -59,7 +59,7 @@ export const Results = () => {
     }
   }, [recomendations]);
 
-useEffect(() => {
+/* useEffect(() => {
   const validateMovies = async (moviesToValidate) => {
     try {
       const response = await axios.post("http://localhost:3000/validate", {
@@ -87,10 +87,10 @@ useEffect(() => {
     }
   };
 
-  if (movies.length > 0) {
+  if (movies.length >= recomendations.length) {
     validateMovies(movies);
   }
-}, [movies, prompt]);
+}, [movies, prompt]); */
 
 
  
@@ -114,8 +114,8 @@ useEffect(() => {
           </h2>
           <div className="grid lg:grid-cols-6 grid-cols-3 w-full h-fit gap-4 justify-items-center">
             <GenreProvider>
-              {validatedMovies.length > 0 &&
-                validatedMovies.map((movie, index) => (
+              {movies.length > 0 &&
+                movies.map((movie, index) => (
                   <ResultCard
                     key={index}
                     title={movie?.title}

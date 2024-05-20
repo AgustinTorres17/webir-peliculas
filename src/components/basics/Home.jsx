@@ -22,7 +22,7 @@ export const Home = () => {
 
   const fetchPopulares = async () => { 
     try {
-      const response = await fetch("http://localhost:3000/popular");
+      const response = await fetch("https://webir-backend.onrender.com/popular");
       const data = await response.json();
       setPopulares(data);
     } catch (error) {

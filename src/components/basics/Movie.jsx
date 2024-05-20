@@ -26,7 +26,7 @@ export const Movie = ({ movie }) => {
         <div className="flex flex-col gap-5 items-start justify-start md:justify-start w-full md:w-96 h-fit">
           <div className="flex flex-col gap-2">
             <h2 className="text-accent text-3xl mt-5 md:mt-0 text-center lg:text-start w-full md:w-auto font-bold">
-            {movie.name ? movie.name : movie.title}
+            {movie.name ? movie.name : movie.title + " " + (movie.release_date ? `(${new Date(movie.release_date).getFullYear()})` : "")}
             </h2>
             <p className="text-fuente text-pretty text-center md:text-start">
             {movie ? movie.overview : ""}

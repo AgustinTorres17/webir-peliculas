@@ -12,7 +12,7 @@ export const MiLista = ({}) => {
         <h2 className="text-accent font-bold text-4xl lg:text-center lg:m-5">
           FAVORITAS
         </h2>
-        <div class="grid  lg:grid-cols-4 grid-cols-2 w-full h-fit gap-4  justify-items-center">
+        <div class="grid lg:grid-cols-4 grid-cols-2 w-full h-fit gap-4  justify-items-center">
           <GenreProvider>
             {movies.length > 0 && movies.map((movie, index) => (
               <MovieCard

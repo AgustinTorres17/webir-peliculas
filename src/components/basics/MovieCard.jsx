@@ -21,9 +21,9 @@ export const MovieCard = ({ title, genre, year, imageUrl, id, isMovie }) => {
 
 
   return (
-    <div className="relative overflow-hidden aspect-[9/16]">
+    <div className="relative overflow-hidden aspect-[12/18]">
       <img
-        className="object-cover h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
+        className="h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
         src={imageUrl}
         alt={title}
       />

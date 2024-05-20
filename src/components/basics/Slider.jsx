@@ -17,7 +17,7 @@ export const Slider = ({ movies }) => {
               <MovieCard
                 title={movie.title}
                 genre={movie.genre_ids}
-                year={movie.release_date}
+                year={new Date(movie.release_date).getFullYear()}
                 id={movie.id}
                 isMovie={movie.name ? false : true}
                 imageUrl={"http://image.tmdb.org/t/p/w500/" + movie?.poster_path}

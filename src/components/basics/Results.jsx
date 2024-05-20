@@ -97,7 +97,7 @@ export const Results = () => {
             <Avatar />
           </div>
           <h2 className="text-accent font-bold text-2xl text-center m-5">
-            Estoy buscando las mejores películas para ti...
+            Estoy buscando los mejores resultados para ti...
           </h2>
         </section>
       ) : (

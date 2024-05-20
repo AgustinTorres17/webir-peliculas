@@ -58,7 +58,7 @@ export const MoviePage = () => {
 
   const fetchProviders = async (movieId) => {
     try { 
-      const response = await fetch(`http://localhost:3000/movie-providers?movieId=${movieId}`);
+      const response = await fetch(`https://webir-backend.onrender.com/movie-providers?movieId=${movieId}`);
       if (!response.ok) {
         return;
       }

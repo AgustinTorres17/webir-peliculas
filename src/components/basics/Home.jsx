@@ -97,7 +97,6 @@ export const Home = () => {
 
 
   window.addEventListener("scroll", () => {
-    // check if is tablet or desktop
     const isTabletOrDesktop = window.innerWidth > 1023;
     if (!isTabletOrDesktop) return;
     const carouselHomeTransitioner = document.querySelector(
@@ -144,7 +143,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <section className="mt-16 lg:pt-14 bg-gradient-to-b from-fondo via-accent/15 to-fondo">
+      <section className="mt-16 mb-16 lg:pt-14 bg-gradient-to-b from-fondo via-accent/15 to-fondo">
         <h1 className="inline-block md:pl-2 text-fuente/70 text-2xl font-bold w-full text-center lg:text-start md:text-4xl">
           RECOMENDACIÓN SEMANAL
         </h1>
@@ -157,7 +156,7 @@ export const Home = () => {
       </section>
       <div
         id="homepage-main-content"
-        className="w-full md:fade-in-anim z-10 px-2"
+        className="w-full md:fade-in-anim z-10 px-2 lg:mt-12"
       >
         <div className="space-y-4 mt-6 md:mt-0">
           <div className="space-y-2">

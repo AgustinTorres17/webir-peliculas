@@ -7,11 +7,12 @@ import { useState, useEffect } from "react";
 import { FaList } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 export const Header = () => {
   const [opacity, setOpacity] = useState(1);
   const [scrollTimeout, setScrollTimeout] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +38,15 @@ export const Header = () => {
       if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, [scrollTimeout]);
+
+
+
+    const navigate = useNavigate();
+  
+    const handleClick = () => {
+      navigate("/recomendations", { state: {movieTitle : searchQuery} } );
+    };
+
 
   return (
     <div
@@ -96,8 +106,16 @@ export const Header = () => {
         </Link>
       </div>
       <div className="flex gap-2">
-        <Input placeholder="Buscar" className="w-28" />
-        <Button variant="default">
+
+        <Input type="text"
+        placeholder="Ingrese el titulo que desea ver"
+        className="w-28"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)} />
+
+        <Button variant="default"
+        onClick={handleClick}
+      >
           <FaSearch />
         </Button>
       </div>

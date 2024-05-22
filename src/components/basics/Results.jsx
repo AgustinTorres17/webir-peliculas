@@ -10,12 +10,34 @@ import { Button } from "@/components/ui/button";
 export const Results = () => {
   const location = useLocation();
   const prompt = location.state.prompt || "";
-  const { genreApi, genre } = location.state.genre || "";
+  const { genreApi, genre} = location.state.genre || "";
+  const movieTitle  = location.state.movieTitle || { searchQuery: '' };
+
 
   const [recomendations, setRecomendations] = useState([]);
   const [movies, setMovies] = useState([]);
   const [validatedMovies, setValidatedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  
+  useEffect(() => {
+    fetchMovie(movieTitle);
+  }, [movieTitle]);
+
+
+  const fetchMovie = async (movieTitle) => {
+    try {
+      const response = await axios.get(
+        `https://webir-backend.onrender.com/movie2?movieTitle=${encodeURIComponent(
+          movieTitle
+        )}&type=movie`
+      );
+      setMovies(response.data.results);
+      console.log(response.data.results);
+    } catch (error) {
+      "Error fetching movie details"
+    }
+  };
 
   useEffect(() => {
     if (prompt === "") return;

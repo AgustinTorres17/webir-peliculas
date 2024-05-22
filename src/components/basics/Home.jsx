@@ -5,96 +5,23 @@ import { SemanalMovie } from "./SemanalMovie";
 import { Carousel } from "./Carousel";
 
 import "./Carousel.css";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { ChatAI } from "./ChatAI";
-
-
+import { HomeContext } from "./HomeContext";
+import { Avatar } from "./Avatar";
 
 export const Home = () => {
-  const [movies, setMovies] = useState([]);
-  const [series, setSeries] = useState([]);
-  const [populares, setPopulares] = useState([]);
-  const [terror, setTerror] = useState([]);
-  const [accion, setAccion] = useState([]);
-  const [aventura, setAventura] = useState([]);
-  const [fantasia, setFantasia] = useState([]);
-
-  useEffect(() => {
-    fetchPeliculas();
-    fetchSeries();
-    fetchPopulares();
-    fetchTerror();
-    fetchAccion();
-    fetchAventura();
-    fetchFantasia();
-  }, []);
-
-  const fetchAccion = async () => {
-    try {
-      const response = await fetch("https://webir-backend.onrender.com/accion");
-      const data = await response.json();
-      setAccion(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error al obtener las películas de Accion:", error);
-    }
-  };
-
-  const fetchAventura = async () => {
-    try {
-      const response = await fetch("https://webir-backend.onrender.com/aventura");
-      const data = await response.json();
-      setAventura(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error al obtener las películas de Aventura:", error);
-    }
-  };
-
-  const fetchFantasia = async () => {
-    try {
-      const response = await fetch("https://webir-backend.onrender.com/fantasia");
-      const data = await response.json();
-      setFantasia(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error al obtener las películas de Fantasia:", error);
-    }
-  };
-  
-  const fetchTerror = async () => {
-    try {
-      const response = await fetch("https://webir-backend.onrender.com/terror");
-      const data = await response.json();
-      setTerror(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error al obtener las películas de Terror:", error);
-    }
-  };
-
-  const fetchPopulares = async () => {
-    try {
-      const response = await fetch("https://webir-backend.onrender.com/popular");
-      const data = await response.json();
-      setPopulares(data);
-    } catch (error) {
-      console.error("Error al obtener las películas populares:", error);
-    }
-  };
-
-  const fetchPeliculas = async () => {
-    const response = await fetch("https://webir-backend.onrender.com/movies");
-    const data = await response.json();
-    setMovies(data.results);
-  };
-
-  const fetchSeries = async () => {
-    const response = await fetch("https://webir-backend.onrender.com/series");
-    const data = await response.json();
-    setSeries(data.results);
-  };
-
+  const {
+    movies,
+    series,
+    populares,
+    terror,
+    accion,
+    aventura,
+    fantasia,
+    comedia,
+    docs,
+  } = useContext(HomeContext);
 
   window.addEventListener("scroll", () => {
     const isTabletOrDesktop = window.innerWidth > 1023;
@@ -113,7 +40,7 @@ export const Home = () => {
       }, 400);
     }
   });
-  return (
+  return movies.length > 0 ? (
     <div className="w-full p-0 m-0 bg-fondo flex items-center flex-col carousel">
       <Header />
       <ChatAI />
@@ -161,31 +88,52 @@ export const Home = () => {
         <div className="space-y-4 mt-6 md:mt-0">
           <div className="space-y-2">
             <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              ACCION
+              ACCIÓN
             </h1>
-            <Slider movies={accion.results} />
+            <Slider movies={accion} />
           </div>
           <div className="space-y-2">
             <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
               AVENTURA
             </h1>
-            <Slider movies={aventura.results} />
+            <Slider movies={aventura} />
           </div>
           <div className="space-y-2">
             <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              FANTASIA
+              FANTASÍA
             </h1>
-            <Slider movies={fantasia.results} />
+            <Slider movies={fantasia} />
           </div>
           <div className="space-y-2">
             <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
               TERROR
             </h1>
-            <Slider movies={terror.results} />
+            <Slider movies={terror} />
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+              Comedias
+            </h1>
+            <Slider movies={comedia} />
+          </div>
+          <div className="space-y-2">
+            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+              Documentales
+            </h1>
+            <Slider movies={docs} />
           </div>
         </div>
       </div>
       <div className="h-6"></div>
     </div>
+  ) : (
+    <section className="h-full w-full flex flex-col items-center justify-center">
+      <div className="w-96 h-96 flex justify-center relative">
+        <Avatar />
+      </div>
+      <h2 className="text-accent font-bold text-2xl text-center m-5 relative z-10">
+        Estoy preparando preparando la página para ti...
+      </h2>
+    </section>
   );
 };

@@ -35,4 +35,17 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+#carousel-homepage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  z-index: 1;
+  background: #000;
+  transition: opacity 0.5s ease-in-out;
+}
+
 

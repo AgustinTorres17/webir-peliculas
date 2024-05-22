@@ -69,7 +69,7 @@ export const Carousel = ({ slides }) => {
       onTouchEnd={handleEnd}
     >
       <div
-        className="relative flex transition-transform duration-500 ease-in-out h-72 lg:h-[calc(100vh-56px)]"
+        className="relative  flex transition-transform duration-500 ease-in-out h-72 lg:h-[calc(100vh-56px)]"
         style={{
           width: `${slidesL * 100}%`,
           transform: `translateX(calc(-${(curr * 100) / slidesL}% + ${offsetX}px))`,
@@ -82,7 +82,7 @@ export const Carousel = ({ slides }) => {
               alt="slide"
               className="overflow-hidden w-screen object-cover object-center fade-bottom"
             />
-            <div className="hidden md:block absolute bottom-4 right-4 z-10">
+            <div className="hidden md:block absolute bottom-4 right-4">
               <h1 className="text-4xl text-white font-semibold">{slide.title ? slide.title : slide.name}</h1>
             </div>
           </div>
@@ -91,7 +91,7 @@ export const Carousel = ({ slides }) => {
       <div className="absolute z-20 inset-y-0 flex items-center justify-between w-full p-4">
         <button
           onClick={prev}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary text-black hover:text-accent transition-all ease-in-out duration-300"
           style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }}
           color="secondary"
         >
@@ -99,7 +99,7 @@ export const Carousel = ({ slides }) => {
         </button>
         <button
           onClick={next}
-          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary hover:text-accent transition-all ease-in-out duration-300"
+          className="rounded-full shadow opacity-100 bg-fuente p-4 hover:bg-primary text-black hover:text-accent transition-all ease-in-out duration-300"
           style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)' }}
           color="secondary"
         >

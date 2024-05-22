@@ -15,9 +15,9 @@ export const Slider = ({ movies }) => {
           <CarouselItem className="basis-auto pl-0" key={index}>
             <div className="w-32 md:w-52 ">
               <MovieCard
-                title={movie.title}
+                title={movie.title ? movie.title : movie.name}
                 genre={movie.genre_ids}
-                year={new Date(movie.release_date).getFullYear()}
+                year={movie.release_date ? new Date(movie.release_date).getFullYear() : new Date(movie.first_air_date).getFullYear()}
                 id={movie.id}
                 isMovie={movie.name ? false : true}
                 imageUrl={"http://image.tmdb.org/t/p/w500/" + movie?.poster_path}

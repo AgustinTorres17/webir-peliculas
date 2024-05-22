@@ -9,8 +9,10 @@ import { useContext } from "react";
 import { ChatAI } from "./ChatAI";
 import { HomeContext } from "./HomeContext";
 import { Avatar } from "./Avatar";
+import { useNavigate, Link } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
   const {
     movies,
     series,
@@ -40,6 +42,10 @@ export const Home = () => {
       }, 400);
     }
   });
+
+  const handleClick = (event) => {
+    navigate("/recomendations", { state: { genre: event.genre } });
+  };
   return movies.length > 0 ? (
     <div className="w-full p-0 m-0 bg-fondo flex items-center flex-col carousel">
       <Header />
@@ -87,39 +93,81 @@ export const Home = () => {
       >
         <div className="space-y-4 mt-6 md:mt-0">
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              ACCIÓN
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "adventure", genre: "acción"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+                ACCIÓN
+              </h1>
+            </button>
             <Slider movies={accion} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              AVENTURA
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "adventure", genre: "aventura"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+                AVENTURA
+              </h1>
+            </button>
             <Slider movies={aventura} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              FANTASÍA
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "fantasy", genre: "fantasía"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+                FANTASÍA
+              </h1>
+            </button>
             <Slider movies={fantasia} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              TERROR
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "horror", genre: "terror"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+                TERROR
+              </h1>
+            </button>
             <Slider movies={terror} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              Comedias
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "comedy", genre: "comedia"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
+                COMEDIA
+              </h1>
+            </button>
             <Slider movies={comedia} />
           </div>
           <div className="space-y-2">
-            <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-              Documentales
-            </h1>
+            <button
+              onClick={(event) => {
+                event.genre = {genreApi: "documentary", genre: "documentales"};
+                handleClick(event);
+              }}
+            >
+              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl ">
+                DOCUMENTALES
+              </h1>
+            </button>
             <Slider movies={docs} />
           </div>
         </div>

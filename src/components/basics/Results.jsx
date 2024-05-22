@@ -5,23 +5,35 @@ import { Header } from "./Header";
 import { ResultCard } from "./ResultCard";
 import { GenreProvider } from "./GenreContext";
 import { Avatar } from "./Avatar";
+import { Button } from "@/components/ui/button";
 
 export const Results = () => {
   const location = useLocation();
   const prompt = location.state.prompt || "";
+  const { genreApi, genre } = location.state.genre || "";
+
   const [recomendations, setRecomendations] = useState([]);
   const [movies, setMovies] = useState([]);
   const [validatedMovies, setValidatedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if (prompt === "") return;
+    if (localStorage.getItem(`${prompt}`)) {
+      setRecomendations(JSON.parse(localStorage.getItem(`${prompt}`)));
+      return;
+    }
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post("https://webir-backend.onrender.com/generate", {
-          prompt,
-        });
+        const res = await axios.post(
+          "https://webir-backend.onrender.com/generate",
+          {
+            prompt,
+          }
+        );
         setRecomendations(res.data);
+        localStorage.setItem(`${prompt}`, JSON.stringify(res.data));
       } catch (error) {
         console.error("Error fetching recommendations:", error);
       }
@@ -29,6 +41,33 @@ export const Results = () => {
     };
     fetchData();
   }, [prompt]);
+
+  useEffect(() => {
+    if (genreApi === "") return;
+    if (localStorage.getItem(`${genre}`)) {
+      setMovies(JSON.parse(localStorage.getItem(`${genre}`)));
+      return;
+    }
+    const fetchByGenre = async () => {
+      try {
+        setIsLoading(true);
+        const res = await axios.get(
+          `http://localhost:3000/genre?genre=${genreApi}`
+        );
+        setMovies(res.data);
+        localStorage.setItem(`${genre}`, JSON.stringify(res.data));
+      } catch (error) {
+        console.error("Error fetching movies by genre:", error);
+      }
+      setIsLoading(false);
+    };
+    fetchByGenre();
+  }, [genre]);
+
+  const refreshData = () => {
+    localStorage.removeItem(`${genre}`);
+    window.location.reload();
+  };
 
   useEffect(() => {
     const fetchMovie = async (movieTitle) => {
@@ -59,7 +98,7 @@ export const Results = () => {
     }
   }, [recomendations]);
 
-/* useEffect(() => {
+  /* useEffect(() => {
   const validateMovies = async (moviesToValidate) => {
     try {
       const response = await axios.post("http://localhost:3000/validate", {
@@ -93,7 +132,6 @@ export const Results = () => {
 }, [movies, prompt]); */
 
 
- 
 
   return (
     <main className="flex flex-col w-full">
@@ -109,23 +147,35 @@ export const Results = () => {
         </section>
       ) : (
         <section className="px-5">
-          <h2 className="text-accent font-bold text-2xl text-center m-5">
-            Te Recomendamos:
-          </h2>
+          {prompt != "" ? (
+            <h2 className="text-accent font-bold text-2xl text-center m-5">
+              Te Recomendamos:
+            </h2>
+          ) : (
+            <h2 className="text-accent font-bold text-2xl text-center m-5">
+              Películas y Series de {genre}
+            </h2>
+          )}
+
           <div className="grid lg:grid-cols-6 grid-cols-3 w-full h-fit gap-4 justify-items-center">
             <GenreProvider>
-              {movies.length > 0 &&
+              {movies?.length > 0 &&
                 movies.map((movie, index) => (
                   <ResultCard
                     key={index}
-                    title={movie?.title}
-                    year={movie?.year}
-                    id={movie?.id}
-                    isMovie={!movie?.name}
-                    imageUrl={`http://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
+                    title={movie.title ? movie.title : movie.name}
+                    year={movie.year}
+                    id={movie.id}
+                    isMovie={!movie.name}
+                    imageUrl={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   />
                 ))}
             </GenreProvider>
+          </div>
+          <div className="w-full flex justify-center my-2">
+            <Button variant="secondary" onClick={() => refreshData()}>
+              Recargar Resultados
+            </Button>
           </div>
         </section>
       )}

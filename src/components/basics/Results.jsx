@@ -52,7 +52,7 @@ export const Results = () => {
       try {
         setIsLoading(true);
         const res = await axios.get(
-          `http://localhost:3000/genre?genre=${genreApi}`
+          `https://webir-backend.onrender.com/genre?genre=${genreApi}`
         );
         setMovies(res.data);
         localStorage.setItem(`${genre}`, JSON.stringify(res.data));

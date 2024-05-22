@@ -63,6 +63,18 @@ const handleInput2 = (e) => {
     } 
   };
 
+  const handleButtonSearch= () => {
+    const searchParams = {
+      types: selectedButtons.filter(button => ["Películas", "Series", "Animes"].includes(button)),
+      genres: selectedButtons.filter(button => ["Accion", "Drama", "Suspenso", "Comedia", "Infantil", "Familiar", "Terror", "Documental"].includes(button)),
+      minYear,
+      maxYear,
+      minDuration: showDurationSlider ? minDuration : null,
+      maxDuration: showDurationSlider ? maxDuration : null,
+      chapters: showChapterButtons ? selectedButtons.filter(button => ["1-8", "8-40", "40 +"].includes(button)) : [],
+    };
+  };
+
   return (
     <div className='card'>
   <div style={{ display: 'flex', justifyContent: 'right' }}>
@@ -220,7 +232,7 @@ const handleInput2 = (e) => {
         <Textarea variant="form" />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Button variant="Search" >
+      <Button variant="Search" onClick={() => handleButtonSearch()} >
         Buscar
       </Button>
 

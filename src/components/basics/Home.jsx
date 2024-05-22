@@ -93,16 +93,17 @@ export const Home = () => {
       >
         <div className="space-y-4 mt-6 md:mt-0">
           <div className="space-y-2">
-            <button
-              onClick={(event) => {
-                event.genre = {genreApi: "adventure", genre: "acción"};
-                handleClick(event);
-              }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-                ACCIÓN
-              </h1>
-            </button>
+          <button
+      onClick={(event) => {
+        event.genre = { genreApi: 'adventure', genre: 'acción' };
+        handleClick(event);
+      }}
+      className="group"
+    >
+      <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+        ACCIÓN
+      </h1>
+    </button>
             <Slider movies={accion} />
           </div>
           <div className="space-y-2">
@@ -111,9 +112,10 @@ export const Home = () => {
                 event.genre = {genreApi: "adventure", genre: "aventura"};
                 handleClick(event);
               }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-                AVENTURA
+              className="group"
+              >
+                <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+                 AVENTURA
               </h1>
             </button>
             <Slider movies={aventura} />
@@ -124,9 +126,10 @@ export const Home = () => {
                 event.genre = {genreApi: "fantasy", genre: "fantasía"};
                 handleClick(event);
               }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-                FANTASÍA
+              className="group"
+              >
+                <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+                 FANTASÍA
               </h1>
             </button>
             <Slider movies={fantasia} />
@@ -137,9 +140,10 @@ export const Home = () => {
                 event.genre = {genreApi: "horror", genre: "terror"};
                 handleClick(event);
               }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-                TERROR
+              className="group"
+              >
+                <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+                  TERROR
               </h1>
             </button>
             <Slider movies={terror} />
@@ -150,9 +154,10 @@ export const Home = () => {
                 event.genre = {genreApi: "comedy", genre: "comedia"};
                 handleClick(event);
               }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl">
-                COMEDIA
+              className="group"
+              >
+                <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+                  COMEDIA
               </h1>
             </button>
             <Slider movies={comedia} />
@@ -163,9 +168,10 @@ export const Home = () => {
                 event.genre = {genreApi: "documentary", genre: "documentales"};
                 handleClick(event);
               }}
-            >
-              <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl ">
-                DOCUMENTALES
+              className="group"
+              >
+                <h1 className="text-fuente/70 text-xl font-bold w-full text-center md:text-start md:text-4xl group-hover:text-accent">
+                  DOCUMENTALES
               </h1>
             </button>
             <Slider movies={docs} />

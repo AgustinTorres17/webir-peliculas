@@ -175,8 +175,8 @@ export const Results = () => {
             </h2>
           ) : (
             <h2 className="text-accent font-bold text-2xl text-center m-5">
-              Películas y Series de {genre}
-            </h2>
+            {genre ? `Películas y Series de ${genre}` : `Películas y Series con nombre ${movieTitle}`}
+          </h2>
           )}
 
           <div className="grid lg:grid-cols-6 grid-cols-3 w-full h-fit gap-4 justify-items-center">

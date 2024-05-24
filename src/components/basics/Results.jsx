@@ -92,7 +92,7 @@ export const Results = () => {
       try {
         setIsLoading(true);
         const res = await axios.get(
-          `http://localhost:3000/genre?genre=${genreApi}`
+          `https://webir-backend.onrender.com/genre?genre=${genreApi}`
         );
         let aux = res.data;
         const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
@@ -124,7 +124,7 @@ export const Results = () => {
     const fetchByType = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/${type}`);
+        const response = await axios.get(`https://webir-backend.onrender.com/${type}`);
         let aux = response.data;
         const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
         const removeDuplicates = orderByPopularity.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);

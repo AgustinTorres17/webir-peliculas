@@ -69,14 +69,14 @@ export const Carousel = ({ slides }) => {
       onTouchEnd={handleEnd}
     >
       <div
-        className="relative  flex transition-transform duration-500 ease-in-out h-72 lg:h-[calc(100vh-56px)]"
+        className="relative  flex transition-transform duration-500 ease-in-out h-full md:h-72 lg:h-[calc(100vh-56px)]"
         style={{
           width: `${slidesL * 100}%`,
           transform: `translateX(calc(-${(curr * 100) / slidesL}% + ${offsetX}px))`,
         }}
       >
         {combinedSlides.map((slide, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative h-full">
             <img
               src={"http://image.tmdb.org/t/p/original/" + slide.backdrop_path}
               alt="slide"

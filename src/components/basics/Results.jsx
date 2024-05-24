@@ -10,20 +10,39 @@ import { Button } from "@/components/ui/button";
 export const Results = () => {
   const location = useLocation();
   const prompt = location.state.prompt || "";
-  const { genreApi, genre} = location.state.genre || "";
-  const movieTitle  = location.state.movieTitle || { searchQuery: '' };
-
+  let genreApi = "";
+  let genre = "";
+  let genreObj = location.state.genre;
+  if (genreObj) {
+    genre = genreObj.genre;
+    genreApi = genreObj.genreApi;
+  }
+  const type = location.state.type || "";
+  const movieTitle = location.state.movieTitle || { searchQuery: "" };
 
   const [recomendations, setRecomendations] = useState([]);
   const [movies, setMovies] = useState([]);
   const [validatedMovies, setValidatedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [actualValue, setActualValue] = useState("")
   
+
   useEffect(() => {
+    if(prompt != "") {
+      setActualValue(prompt);
+    } else if (genre != "") {
+      setActualValue(genre);
+    } else if (type != "") {
+      setActualValue(type);
+    } else if (movieTitle != "") {
+      setActualValue(movieTitle.searchQuery);
+    }
+  }, [])
+
+  useEffect(() => {
+    if (movieTitle == "" || movieTitle.searchQuery == "") return;
     fetchMovie(movieTitle);
   }, [movieTitle]);
-
 
   const fetchMovie = async (movieTitle) => {
     try {
@@ -33,14 +52,13 @@ export const Results = () => {
         )}&type=movie`
       );
       setMovies(response.data.results);
-      console.log(response.data.results);
     } catch (error) {
-      "Error fetching movie details"
+      ("Error fetching movie details");
     }
   };
 
   useEffect(() => {
-    if (prompt === "") return;
+    if (type != "" || genreApi != "") return;
     if (localStorage.getItem(`${prompt}`)) {
       setRecomendations(JSON.parse(localStorage.getItem(`${prompt}`)));
       return;
@@ -65,7 +83,7 @@ export const Results = () => {
   }, [prompt]);
 
   useEffect(() => {
-    if (genreApi === "") return;
+    if (prompt != "" || type != "") return;
     if (localStorage.getItem(`${genre}`)) {
       setMovies(JSON.parse(localStorage.getItem(`${genre}`)));
       return;
@@ -74,20 +92,55 @@ export const Results = () => {
       try {
         setIsLoading(true);
         const res = await axios.get(
-          `https://webir-backend.onrender.com/genre?genre=${genreApi}`
+          `http://localhost:3000/genre?genre=${genreApi}`
         );
-        setMovies(res.data);
+        let aux = res.data;
+        const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
+        const removeDuplicates = orderByPopularity.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+        console.log(removeDuplicates);
+        setMovies((prevMovies) => [...prevMovies, ...removeDuplicates]);
         localStorage.setItem(`${genre}`, JSON.stringify(res.data));
+        
       } catch (error) {
         console.error("Error fetching movies by genre:", error);
       }
       setIsLoading(false);
     };
     fetchByGenre();
+    
   }, [genre]);
 
+  useEffect(() => {
+    debugger;
+    if (prompt != "" || genreApi != "" || movieTitle.searchQuery != "") return;
+    const dataLocal = localStorage.getItem(`${type}`);
+    if (dataLocal != null && dataLocal != 'undefined') {
+      const data = JSON.parse(localStorage.getItem(`${type}`));
+      setMovies(data);
+      if (data.length != 0) {
+        return;
+      }
+    }
+    const fetchByType = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`http://localhost:3000/${type}`);
+        let aux = response.data;
+        const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
+        const removeDuplicates = orderByPopularity.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+        console.log(removeDuplicates);
+        setMovies((prevMovies) => [...prevMovies, ...removeDuplicates]);
+        localStorage.setItem(`${type}`, JSON.stringify(response.data));
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching movies by type:", error);
+      }
+    };
+    fetchByType();
+  }, [type]);
+
   const refreshData = () => {
-    localStorage.removeItem(`${genre}`);
+    localStorage.removeItem(`${actualValue}`);
     window.location.reload();
   };
 
@@ -175,8 +228,10 @@ export const Results = () => {
             </h2>
           ) : (
             <h2 className="text-accent font-bold text-2xl text-center m-5">
-            {genre ? `Películas y Series de ${genre}` : `Películas y Series con nombre ${movieTitle}`}
-          </h2>
+              {genre
+                ? `Películas y Series de ${genre}`
+                : type == "movies" ? 'Películas' : type == 'series' ? 'Series' : `Películas y Series con nombre ${movieTitle}`}
+            </h2>
           )}
 
           <div className="grid lg:grid-cols-6 grid-cols-3 w-full h-fit gap-4 justify-items-center">

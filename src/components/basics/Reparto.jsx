@@ -19,7 +19,7 @@ export const Reparto = ({ reparto }) => {
           <p className="text-white">Cargando reparto...</p>
         ) : hasCast ? (
           <div className="grid grid-cols-3 gap-4 lg:gap-y-4 justify-items-start w-full">
-            {reparto.cast.slice(0, 6).map((actor) => (
+            {reparto?.cast?.slice(0, 6)?.map((actor) => (
               <div key={actor.name} className="flex flex-col items-center text-fuente hover:text-accent transition-all duration-300">
                 <img
                   src={actor.profile_path

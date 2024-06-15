@@ -18,123 +18,113 @@ export const Results = () => {
     genreApi = genreObj.genreApi;
   }
   const type = location.state.type || "";
-  const movieTitle = location.state.movieTitle || { searchQuery: "" };
+  const movieTitle = location.state.movieTitle || "";
+/*   console.log("movieTitle", movieTitle); */
+
 
   const [recomendations, setRecomendations] = useState([]);
   const [movies, setMovies] = useState([]);
-  const [validatedMovies, setValidatedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [actualValue, setActualValue] = useState("")
-  
+  const [actualValue, setActualValue] = useState("");
+  const [validateFlag, setValidateFlag] = useState(false);
 
   useEffect(() => {
-    if(prompt != "") {
+    if (prompt !== "") {
       setActualValue(prompt);
-    } else if (genre != "") {
+    } else if (genre !== "") {
       setActualValue(genre);
-    } else if (type != "") {
+    } else if (type !== "") {
       setActualValue(type);
-    } else if (movieTitle != "") {
+    } else if (movieTitle.searchQuery !== "") {
       setActualValue(movieTitle.searchQuery);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (movieTitle == "" || movieTitle.searchQuery == "") return;
+    const fetchMovie = async (movieTitle) => {
+      console.log("movieTitle", movieTitle);
+      try {
+        const response = await axios.get(
+          `https://webir-backend.onrender.com/movie2?movieTitle=${encodeURIComponent(
+            movieTitle
+          )}&type=movie`
+        );
+        console.log(response.data);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+    if (movieTitle === "" || !movieTitle) return;
     fetchMovie(movieTitle);
   }, [movieTitle]);
 
-  const fetchMovie = async (movieTitle) => {
-    try {
-      const response = await axios.get(
-        `https://webir-backend.onrender.com/movie2?movieTitle=${encodeURIComponent(
-          movieTitle
-        )}&type=movie`
-      );
-      setMovies(response.data.results);
-    } catch (error) {
-      ("Error fetching movie details");
-    }
-  };
-
   useEffect(() => {
-    if (type != "" || genreApi != "") return;
-    if (localStorage.getItem(`${prompt}`)) {
-      setRecomendations(JSON.parse(localStorage.getItem(`${prompt}`)));
-      return;
-    }
+    if (type !== "" || genreApi !== "" || movieTitle !== "") return;
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post(
-          "https://webir-backend.onrender.com/generate",
-          {
-            prompt,
-          }
-        );
+        const res = await axios.post("http://localhost:3000/generate", {
+          prompt,
+        });
         setRecomendations(res.data);
         localStorage.setItem(`${prompt}`, JSON.stringify(res.data));
       } catch (error) {
         console.error("Error fetching recommendations:", error);
       }
-      setIsLoading(false);
+      
     };
     fetchData();
   }, [prompt]);
 
   useEffect(() => {
-    if (prompt != "" || type != "") return;
-    if (localStorage.getItem(`${genre}`)) {
-      setMovies(JSON.parse(localStorage.getItem(`${genre}`)));
+    if (prompt !== "" || type !== "" || movieTitle !== "")
       return;
-    }
     const fetchByGenre = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const res = await axios.get(
           `https://webir-backend.onrender.com/genre?genre=${genreApi}`
         );
-        let aux = res.data;
-        const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
-        const removeDuplicates = orderByPopularity.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
-        console.log(removeDuplicates);
+        const aux = res.data;
+        const orderByPopularity = aux
+          .concat(movies)
+          .sort((a, b) => b.popularity - a.popularity);
+        const removeDuplicates = orderByPopularity.filter(
+          (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+        );
         setMovies((prevMovies) => [...prevMovies, ...removeDuplicates]);
         localStorage.setItem(`${genre}`, JSON.stringify(res.data));
-        
       } catch (error) {
         console.error("Error fetching movies by genre:", error);
       }
       setIsLoading(false);
     };
     fetchByGenre();
-    
   }, [genre]);
 
   useEffect(() => {
-    debugger;
-    if (prompt != "" || genreApi != "" || movieTitle.searchQuery != "") return;
-    const dataLocal = localStorage.getItem(`${type}`);
-    if (dataLocal != null && dataLocal != 'undefined') {
-      const data = JSON.parse(localStorage.getItem(`${type}`));
-      setMovies(data);
-      if (data.length != 0) {
-        return;
-      }
-    }
+    if (prompt !== "" || genreApi !== "" || movieTitle !== "")
+      return;
     const fetchByType = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`https://webir-backend.onrender.com/${type}`);
-        let aux = response.data;
-        const orderByPopularity = aux.concat(movies).sort((a, b) => b.popularity - a.popularity);
-        const removeDuplicates = orderByPopularity.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
-        console.log(removeDuplicates);
+        const response = await axios.get(
+          `https://webir-backend.onrender.com/${type}`
+        );
+        const aux = response.data;
+        const orderByPopularity = aux
+          .concat(movies)
+          .sort((a, b) => b.popularity - a.popularity);
+        const removeDuplicates = orderByPopularity.filter(
+          (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+        );
         setMovies((prevMovies) => [...prevMovies, ...removeDuplicates]);
         localStorage.setItem(`${type}`, JSON.stringify(response.data));
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching movies by type:", error);
       }
+      setIsLoading(false);
     };
     fetchByType();
   }, [type]);
@@ -148,65 +138,80 @@ export const Results = () => {
     const fetchMovie = async (movieTitle) => {
       try {
         const response = await axios.get(
-          `https://webir-backend.onrender.com/movie?movieTitle=${encodeURIComponent(
+          `http://localhost:3000/movie?movieTitle=${encodeURIComponent(
             movieTitle
           )}&type=movie`
         );
         if (response.data.results.length > 0) {
-          setMovies((prevMovies) => {
-            const newMovies = response.data.results.filter(
-              (movie) =>
-                !prevMovies.some((prevMovie) => prevMovie.id === movie.id)
-            );
-            return [...prevMovies, ...newMovies];
-          });
+          return response.data.results.filter(
+            (movie) => !movies?.some((prevMovie) => prevMovie.id === movie.id)
+          );
         }
       } catch (error) {
         console.error("Error fetching movie details:", error);
       }
     };
 
-    if (recomendations.length > 0) {
-      recomendations.forEach((recomend) => {
-        fetchMovie(recomend);
-      });
-    }
+    const validateMovies = async (moviesToValidate) => {
+      try {
+        let moviesToValidateData = [];
+        moviesToValidate.forEach((movie) => {
+          if (movie.name) {
+            moviesToValidateData.push({
+              id: movie.id,
+              title: movie.title,
+              poster_path: movie.poster_path,
+              overview: movie.overview,
+              year: movie.year,
+              genre_ids: movie.genre_ids,
+              name: movie.name,
+              cast: movie.cast,
+            });
+          } else {
+            moviesToValidateData.push({
+              id: movie.id,
+              title: movie.title,
+              poster_path: movie.poster_path,
+              overview: movie.overview,
+              year: movie.year,
+              genre_ids: movie.genre_ids,
+              cast: movie.cast,
+            });
+          }
+        });
+        console.log(moviesToValidateData.length)
+        const res = await axios.post("http://localhost:3000/validate", {
+          recommendations: moviesToValidateData,
+          prompt,
+        });
+        return res.data;
+      } catch (error) {
+        console.error("Error validating movies:", error);
+      }
+    };
+
+    const fetchAllMovies = async () => {
+      if (recomendations.length > 0 && !validateFlag) {
+        setValidateFlag(true);
+        setIsLoading(true);
+        const newMovies = await Promise.all(
+          recomendations.map((recomend) => fetchMovie(recomend))
+        );
+        const mergedMovies = await newMovies.flat();
+        const validated = await validateMovies(mergedMovies);
+        //funcion que remueve las peliculas o series duplicadas si el titulo e id son iguales
+        const uniqueMovies = validated.results.filter(
+          (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+        );
+        setMovies(uniqueMovies);
+        setIsLoading(false);
+        setValidateFlag(false);
+      }
+    };
+    fetchAllMovies();
   }, [recomendations]);
 
-  /* useEffect(() => {
-  const validateMovies = async (moviesToValidate) => {
-    try {
-      const response = await axios.post("http://localhost:3000/validate", {
-        recommendations: moviesToValidate,
-        prompt,
-      });
-      const validatedResults = response.data;
-
-      // Filtrar las películas válidas
-      const validMovieIds = new Set();
-      const newValidatedMovies = moviesToValidate.filter((movie, index) => {
-        if (validatedResults[index]) {
-          if (!validMovieIds.has(movie.id)) {
-            validMovieIds.add(movie.id);
-            return true;
-          }
-          return false;
-        }
-        return false;
-      });
-
-      setValidatedMovies(newValidatedMovies); // Reemplazar las películas validadas por completo
-    } catch (error) {
-      console.error("Error validating movies:", error);
-    }
-  };
-
-  if (movies.length >= recomendations.length) {
-    validateMovies(movies);
-  }
-}, [movies, prompt]); */
-
-
+  
 
   return (
     <main className="flex flex-col w-full">
@@ -230,7 +235,11 @@ export const Results = () => {
             <h2 className="text-accent font-bold text-2xl text-center m-5">
               {genre
                 ? `Películas y Series de ${genre}`
-                : type == "movies" ? 'Películas' : type == 'series' ? 'Series' : `Películas y Series con nombre ${movieTitle}`}
+                : type == "movies"
+                ? "Películas"
+                : type == "series"
+                ? "Series"
+                : `Películas y Series con nombre ${movieTitle}`}
             </h2>
           )}
 
@@ -240,11 +249,11 @@ export const Results = () => {
                 movies.map((movie, index) => (
                   <ResultCard
                     key={index}
-                    title={movie.title ? movie.title : movie.name}
-                    year={movie.year}
-                    id={movie.id}
-                    isMovie={!movie.name}
-                    imageUrl={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    title={movie?.title ? movie?.title : movie?.name}
+                    year={movie?.year}
+                    id={movie?.id}
+                    isMovie={!movie?.name}
+                    imageUrl={`http://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
                   />
                 ))}
             </GenreProvider>

@@ -32,7 +32,7 @@ export const ChatAI = () => {
             </div>
             <div className="flex w-full justify-between z-[2]">
               <h2 className="text-lg md:text-2xl font-bold tracking-wide">
-                Asesorate con Chaplin
+                Asesorate con Chatplin
               </h2>
               <button
                 onClick={showChatHandler}
@@ -44,7 +44,7 @@ export const ChatAI = () => {
             <p className="mt-4 text-sm md:text-lg font-semibold p-2 text-fuente tracking-wide">
               Hola 👋!
               <br />
-              Soy Chaplin, la IA de{" "}
+              Soy Chatplin, la IA de{" "}
               <span className="text-accent font-semibold">QuePinta</span>.
               <br /> <br /> Mi trabajo es ayudarte a encontrar la película o
               serie que estás buscando! <br /> <br /> Ten en cuenta que mientras

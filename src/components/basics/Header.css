@@ -28,3 +28,16 @@
     backdrop-filter: blur(5px);
     z-index: -1;
   }
+
+
+.grid-container-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    justify-content: end;
+    width: 100%;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr 2fr;
+    }
+}

@@ -50,7 +50,7 @@ export const Header = () => {
 
   return (
     <div
-      className="header-blur w-full bg-fondo h-14 py-2 flex items-center gap-5 px-2 md:px-12 justify-between sticky top-0 z-50"
+      className="header-blur w-full bg-fondo h-14 py-2 gap-5 px-2 md:px-12 justify-between sticky top-0 z-50 grid-container-header"
       style={{ backgroundColor: `rgba(0, 0, 0, ${opacity})` }}
     >
       <Link to="/">
@@ -59,7 +59,7 @@ export const Header = () => {
           <span>QuePinta</span>
         </div>
       </Link>
-      <div className="w-full  items-center text-fuente gap-5  flex justify-center text-xl  py-3 z-50 sm:static sm:bg-transparent">
+      <div className="w-full  items-center text-fuente gap-5  md:flex justify-center text-xl z-50 sm:static sm:bg-transparent hidden ">
         <Link
           to="/"
           className="hover:text-accent transition-all ease-in no-underline text-fuente"
@@ -71,7 +71,7 @@ export const Header = () => {
         </Link>
         <Link
           to="/mi-lista"
-          className="hover:text-accent  transition-all ease-in no-underline text-fuente"
+          className="hover:text-accent  transition-all ease-in no-underline text-fuente text-fuente/30 opacity-30 pointer-events-none"
         >
           <span className="text-base text-fuente hover:text-accent hidden sm:block">
             Mi Lista
@@ -79,7 +79,7 @@ export const Header = () => {
         </Link>
         <Link
           to="/search"
-          className="hover:text-accent transition-all ease-in no-underline text-fuente"
+          className="hover:text-accent transition-all ease-in no-underline text-fuente text-fuente/30 opacity-30 pointer-events-none"
           href=""
         >
           <span className="text-base text-fuente hover:text-accent hidden sm:block">
@@ -105,11 +105,10 @@ export const Header = () => {
           <FaSearchPlus className="sm:hidden" />
         </Link>
       </div>
-      <div className="flex gap-2">
-
+      <div className="flex gap-2 w-full justify-end">
         <Input type="text"
         placeholder="Ingrese el titulo que desea ver"
-        className="w-28"
+        className="w-full md:w-auto"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)} />
 

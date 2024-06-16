@@ -44,7 +44,7 @@ export const ChatAI = () => {
               <IoIosCloseCircle />
             </button>
           </div>
-          <p className="text-sm md:text-md font-semibold p-2 text-fuente tracking-tight leading-4">
+          <p className="text-sm md:text-md font-semibold p-2 text-fuente tracking-tight leading-5">
             Hola 👋
             <br />
             Soy Chatplin, la IA de{" "}

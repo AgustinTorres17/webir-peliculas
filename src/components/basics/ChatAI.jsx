@@ -25,7 +25,7 @@ export const ChatAI = () => {
     <div className="w-screen z-50 absolute">
       <ChatButton showChat={showChatHandler} />
       <div
-        className={`bg-fondo/95 text-fuente rounded-tl-sm rounded-bl-sm shadow-lg max-w-full md:max-w-[30%] 2xl:max-w-[20vw]  fixed bottom-0 right-0 transition-all duration-300 ${
+        className={`bg-fondo/95 text-fuente rounded-tl-sm rounded-bl-sm shadow-lg max-w-full md:max-w-[50%] 2xl:max-w-[20vw]  fixed bottom-0 right-0 transition-all duration-300 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"
         }`}
       >

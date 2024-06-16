@@ -357,12 +357,6 @@
     text-wrap: balance;
   }
 
-  img,
-  video,
-  svg {
-    height: auto;
-    max-width: 100%;
-  }
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

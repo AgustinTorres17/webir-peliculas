@@ -59,7 +59,7 @@ export const Header = () => {
           <span>QuePinta</span>
         </div>
       </Link>
-      <div className="w-full  items-center text-fuente gap-5  md:flex justify-center text-xl z-50 sm:static sm:bg-transparent hidden ">
+      <div className="w-full  items-center text-fuente gap-5  md:flex justify-center text-xl z-50 sm:static sm:bg-transparent block ">
         {/* <Link
           to="/"
           className="hover:text-accent transition-all ease-in no-underline text-fuente"

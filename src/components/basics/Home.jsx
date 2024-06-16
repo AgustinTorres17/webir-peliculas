@@ -213,7 +213,7 @@ export const Home = () => {
         <Avatar />
       </div>
       <h2 className="text-accent font-bold text-2xl text-center m-5 relative z-10">
-        Estoy preparando preparando la página para ti...
+        Estoy preparando la página para ti...
       </h2>
     </section>
   );

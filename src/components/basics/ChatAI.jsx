@@ -45,16 +45,19 @@ export const ChatAI = () => {
             </button>
           </div>
           <p className="text-sm md:text-md font-semibold p-2 text-fuente tracking-tight leading-4">
-            Hola 👋!
+            Hola 👋
             <br />
             Soy Chatplin, la IA de{" "}
             <span className="text-accent font-semibold">QuePinta</span>.
             <br /> <br /> Mi trabajo es ayudarte a encontrar la película o serie
             que estás buscando! <br /> <br /> Ten en cuenta que mientras más
-            preciso (o precisa) seas, mejores serán mis recomendaciones para
-            ti! <br /> <br />
-            Escribe que te interesa y presiona enter para ver mis
-            recomendaciones.
+            preciso (o precisa) seas, mejores serán mis recomendaciones para ti!{" "}
+            <br /> <br />
+            Para que te pueda ayudar mejor, trata de ser un poco específico con
+            lo que buscas, nómbrame géneros o actores para adecuar mi busqueda a
+            tus gustos. <br /> <br />
+            Una vez que finalices de escribir, presiona la tecla enter para ver mis recomendaciones. <br />{" "}
+            <br />
           </p>
           <div className="h-full flex flex-col gap-2 p-2 justify-end">
             <Input

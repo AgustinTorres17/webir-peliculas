@@ -64,7 +64,7 @@ export const Results = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post("http://localhost:3000/generate", {
+        const res = await axios.post("https://webir-backend.onrender.com/generate", {
           prompt,
         });
         setRecomendations(res.data);
@@ -138,7 +138,7 @@ export const Results = () => {
     const fetchMovie = async (movieTitle) => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/movie?movieTitle=${encodeURIComponent(
+          `https://webir-backend.onrender.com/movie?movieTitle=${encodeURIComponent(
             movieTitle
           )}&type=movie`
         );
@@ -180,7 +180,7 @@ export const Results = () => {
           }
         });
         console.log(moviesToValidateData.length)
-        const res = await axios.post("http://localhost:3000/validate", {
+        const res = await axios.post("https://webir-backend.onrender.com/validate", {
           recommendations: moviesToValidateData,
           prompt,
         });

@@ -5,6 +5,7 @@ import { SemanalMovie } from "./SemanalMovie";
 import { Carousel } from "./Carousel";
 
 import "./Carousel.css";
+import "./Scrollbar.css";
 import { useContext } from "react";
 import { ChatAI } from "./ChatAI";
 import { HomeContext } from "./HomeContext";
@@ -97,17 +98,19 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <section className="mt-16 mb-16 lg:pt-14 bg-gradient-to-b from-fondo via-accent/15 to-fondo">
+      <section className="mt-16 mb-16 lg:pt-14 lg:pb-14 lg:pr-14 section-with-background">
+      <div className="relative z-10">
         <h1 className="inline-block md:pl-2 text-fuente/70 text-2xl font-bold w-full text-center lg:text-start md:text-4xl">
           RECOMENDACIÓN SEMANAL
         </h1>
         <SemanalMovie
           title="La Sociedad de la Nieve"
-          imageUrl="https://pics.filmaffinity.com/La_sociedad_de_la_nieve-323264210-large.jpg"
+          imageUrl="https://ae01.alicdn.com/kf/S86b5d1ae0f6a48d7804b8e8ac3eb2391g/P-ster-de-La-sociedad-de-la-nieve-para-decoraci-n-del-hogar-impresiones-n-rdicas.jpg"
           year="2024"
           description="Un avión uruguayo en el que viajan los jugadores del equipo de rugby del Old Christians Club de Montevideo se estrella en la cordillera de los Andes y los supervivientes deben sobreponerse a las condiciones extremas para mantenerse vivos."
         />
-      </section>
+      </div>
+    </section>
       <div
         id="homepage-main-content"
         className="w-full md:fade-in-anim z-10 px-2 lg:mt-12"

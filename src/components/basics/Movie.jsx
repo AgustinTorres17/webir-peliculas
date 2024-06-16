@@ -2,9 +2,8 @@ import React from "react";
 import { Button } from "../ui/button";
 import { FaPlusCircle } from "react-icons/fa";
 import { MdMovieCreation } from "react-icons/md";
-export const Movie = ({ movie }) => {
+export const Movie = ({ movie, trailer }) => {
 
-  
   return (
     <div className="flex  flex-col lg:flex-row p-5 lg:justify-start w-full items-center">
       <div className="w-full flex gap-10 flex-col lg:flex-row justify-between items-start">
@@ -26,20 +25,26 @@ export const Movie = ({ movie }) => {
         <div className="flex flex-col gap-5 items-start justify-start md:justify-start w-full md:w-96 h-fit">
           <div className="flex flex-col gap-2">
             <h2 className="text-accent text-3xl mt-5 md:mt-0 text-center lg:text-start w-full md:w-auto font-bold">
-            {movie.name ? movie.name : movie.title + " " + (movie.release_date ? `(${new Date(movie.release_date).getFullYear()})` : "")}
+              {movie.name ? movie.name : movie.title + " " + (movie.release_date ? `(${new Date(movie.release_date).getFullYear()})` : "")}
             </h2>
             <p className="text-fuente text-pretty text-center md:text-start">
-            {movie ? movie.overview : ""}
+              {movie ? movie.overview : ""}
             </p>
           </div>
           <div className="w-full flex justify-center  gap-3">
             <Button variant={movie.isFav ? "favedMovie" : "unFavedMovie"}>
               <FaPlusCircle />
             </Button>
-            <Button variant="ghost">
-              <MdMovieCreation className="mr-2" />
-              <span> </span>Ver Trailer
-            </Button>
+            <a
+              href={`https://www.youtube.com/watch?v=${trailer}`}
+              target="_blank"
+              rel="noreferrer">
+              <Button variant="ghost">
+                <MdMovieCreation className="mr-2" />
+                Ver Trailer
+              </Button>
+            </a>
+
           </div>
         </div>
       </div>

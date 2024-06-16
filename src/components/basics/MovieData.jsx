@@ -6,9 +6,6 @@ export const MovieData = ({ movie, providers }) => {
 
   const { genres } = useContext(GenreContext);
 
-  /* if (providers) { console.log(providers); } */
-
-
   const getMovieGenresName = () => {
     const movieGenres = [];
     if (movie?.genres?.length > 0) {

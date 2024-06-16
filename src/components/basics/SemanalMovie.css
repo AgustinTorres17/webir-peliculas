@@ -7,7 +7,7 @@
 .Info {
     width: 100%;
     padding:30px;
-    background-color:rgba(0, 0, 0, 0.3);
+    background-color:rgba(0, 0, 0, .2);
     backdrop-filter: blur(3px);
 }
 

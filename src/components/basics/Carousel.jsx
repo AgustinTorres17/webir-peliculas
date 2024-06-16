@@ -69,7 +69,7 @@ export const Carousel = ({ slides }) => {
       onTouchEnd={handleEnd}
     >
       <div
-        className="relative flex transition-transform duration-500 ease-in-out h-full md:h-72 lg:h-[calc(100vh-56px)]"
+        className="relative flex transition-transform duration-500 ease-in-out lg:h-[calc(100vh-56px)]"
         style={{
           width: `${slidesL * 100}%`,
           transform: `translateX(calc(-${(curr * 100) / slidesL}% + ${offsetX}px))`,

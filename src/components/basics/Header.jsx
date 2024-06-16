@@ -60,7 +60,7 @@ export const Header = () => {
         </div>
       </Link>
       <div className="w-full  items-center text-fuente gap-5  md:flex justify-center text-xl z-50 sm:static sm:bg-transparent hidden ">
-        <Link
+        {/* <Link
           to="/"
           className="hover:text-accent transition-all ease-in no-underline text-fuente"
           href=""
@@ -103,7 +103,7 @@ export const Header = () => {
           href=""
         >
           <FaSearchPlus className="sm:hidden" />
-        </Link>
+        </Link> */}
       </div>
       <div className="flex gap-2 w-full justify-end">
         <Input type="text"

@@ -24,11 +24,11 @@ export const ChatAI = () => {
       {opacity > 0 && (
         <div
           style={{ opacity: opacity }}
-          className="bg-fondo/95 text-fuente rounded-tl-sm rounded-bl-sm shadow-lg w-screen md:w-[55vw] xl:w-[25vw] h-[60vh] md:h-[50vh] xl:h-[70vh] fixed bottom-0 right-0 transition-all duration-300"
+          className="bg-fondo/95 text-fuente rounded-tl-sm rounded-bl-sm shadow-lg w-screen md:w-[55vw] xl:w-[60vh] h-[70vh] md:h-[60vh] xl:h-[60vh] fixed bottom-0 right-0 transition-all duration-300"
         >
           <div className="flex flex-col justify-between p-2 h-full w-full relative">
             <div className="absolute top-0 h-24 w-full flex justify-end items-start z-[1]">
-              <Avatar className="" isChat={true}/>
+              <Avatar className="" isChat={true} />
             </div>
             <div className="flex w-full justify-between z-[2]">
               <h2 className="text-lg md:text-2xl font-bold tracking-wide">
@@ -41,7 +41,7 @@ export const ChatAI = () => {
                 <IoIosCloseCircle />
               </button>
             </div>
-            <p className="mt-4 text-sm md:text-lg font-semibold p-2 text-fuente tracking-wide">
+            <p className="mt-4 text-sm md:text-[2vh] font-semibold p-2 text-fuente tracking-wide">
               Hola 👋!
               <br />
               Soy Chatplin, la IA de{" "}

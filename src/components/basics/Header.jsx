@@ -50,7 +50,7 @@ export const Header = () => {
 
   return (
     <div
-      className="header-blur w-full bg-fondo h-14 py-2 gap-5 px-2 md:px-12 justify-between sticky top-0 z-50 grid-container-header"
+      className="header-blur w-full bg-fondo h-14 py-2 gap-5 px-2 md:px-12 justify-between sticky top-0 z-[1000] grid-container-header"
       style={{ backgroundColor: `rgba(0, 0, 0, ${opacity})` }}
     >
       <Link to="/">

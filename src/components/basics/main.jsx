@@ -2,11 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { Home } from "./Home.jsx";
-
 import { SearchPage } from "./SearchPage.jsx";
-
 import { MiLista } from "./MiLista.jsx";
-
 import { MoviePage } from "./MoviePage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Results } from "./Results.jsx";
@@ -35,11 +32,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+const Root = () => (
+  <HomeProvider>
+    <RouterProvider router={router} />
+    <div className="py-4 invisible"></div>
+  </HomeProvider>
+);
+
+const isIn = 'DEV'
+
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <HomeProvider>
-      <RouterProvider router={router} />
-      <div className="py-4 invisible"></div>
-    </HomeProvider>
-  </React.StrictMode>
+  isIn === 'production' ? (
+    <React.StrictMode>
+      <Root />
+    </React.StrictMode>
+  ) : (
+    <Root />
+  )
 );

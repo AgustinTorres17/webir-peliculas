@@ -69,7 +69,7 @@ export const Carousel = ({ slides }) => {
       onTouchEnd={handleEnd}
     >
       <div
-        className="relative flex transition-transform duration-500 ease-in-out h-full md:h-72 lg:h-[calc(100vh-56px)]"
+        className="relative flex transition-transform duration-500 ease-in-out xl:h-[calc(100vh-56px)]"
         style={{
           width: `${slidesL * 100}%`,
           transform: `translateX(calc(-${(curr * 100) / slidesL}% + ${offsetX}px))`,
@@ -80,7 +80,7 @@ export const Carousel = ({ slides }) => {
             <img
               src={"http://image.tmdb.org/t/p/original/" + slide.backdrop_path}
               alt="slide"
-              className="overflow-hidden w-full object-cover object-center fade-bottom"
+              className="overflow-hidden w-full h-full object-cover object-center fade-bottom"
             />
             <div className="hidden md:block absolute bottom-4 right-4">
               <h1 className="text-4xl text-white font-semibold">{slide.title ? slide.title : slide.name}</h1>

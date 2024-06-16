@@ -16,35 +16,48 @@ export const MovieCard = ({ title, genre, year, imageUrl, id, isMovie }) => {
       movieGenres.push(genreName?.name);
     });
     return movieGenres.join(", ");
-  }
+  };
 
-
+  console.log("ResultCard", imageUrl);
 
   return (
     <div className="relative overflow-hidden aspect-[12/18]">
-      <img
-        className="h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
-        src={imageUrl}
-        alt={title}
-      />
+      {imageUrl === "http://image.tmdb.org/t/p/w500/null" ? (
+        <img
+          src="https://png.pngtree.com/png-vector/20221125/ourmid/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg"
+          alt=""
+          className="h-full object-cover transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
+        />
+      ) : (
+        <img
+          className="h-full w-full transform transition duration-500 ease-in-out hover:scale-110 active:scale-110"
+          src={imageUrl}
+          alt={title}
+        />
+      )}
+
       <div className="absolute inset-0 text-center text-pretty bg-black bg-opacity-60 flex flex-col items-center justify-center gap-5 md:p-4 md:gap-1 opacity-0 hover:opacity-100 active:opacity-100 transition-opacity duration-500">
         <h2 className="text-sm md:text-lg text-pretty font-semibold text-white leading-4 md:leading-6">
           {title} ({year})
         </h2>
         <p className="md:text-sm text-white text-opacity-50 hidden md:block">
-          {genres
-            ? getMovieGenresName().toString()
-            : "Cargando géneros..."}
+          {genres ? getMovieGenresName().toString() : "Cargando géneros..."}
         </p>
         <div className="w-full flex justify-center">
-          {isMovie ? ( <Link to={`/movie/${id}`}>
-            <Button className="p-2" variant="default">Ver Detalles</Button>
-          </Link>) : (
+          {isMovie ? (
+            <Link to={`/movie/${id}`}>
+              <Button className="p-2" variant="default">
+                Ver Detalles
+              </Button>
+            </Link>
+          ) : (
             <Link to={`/serie/${id}`}>
-              <Button className="p-2" variant="default">Ver Detalles</Button>
+              <Button className="p-2" variant="default">
+                Ver Detalles
+              </Button>
             </Link>
           )}
-         
+
           <Button variant="favedMovie" className="ml-5 hidden md:block">
             <FaPlusCircle></FaPlusCircle>
           </Button>

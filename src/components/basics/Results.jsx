@@ -156,7 +156,7 @@ export const Results = () => {
       try {
         let moviesToValidateData = [];
         moviesToValidate.forEach((movie) => {
-          if (movie.name) {
+          if (movie && movie.name) {
             moviesToValidateData.push({
               id: movie.id,
               title: movie.title,
@@ -167,7 +167,7 @@ export const Results = () => {
               name: movie.name,
               cast: movie.cast,
             });
-          } else {
+          } else if(movie) {
             moviesToValidateData.push({
               id: movie.id,
               title: movie.title,
@@ -191,23 +191,42 @@ export const Results = () => {
     };
 
     const fetchAllMovies = async () => {
-      if (recomendations.length > 0 && !validateFlag) {
-        setValidateFlag(true);
+      if (recomendations.length > 0 && movies.length === 0) {
+   
         setIsLoading(true);
+    
+        const fetchMovieWithCatch = async (recomend) => {
+          try {
+            return await fetchMovie(recomend);
+          } catch (error) {
+            console.error(`Error fetching movie for recommendation ${recomend}:`, error);
+            return null; // Return null or some fallback value
+          }
+        };
+        console.log("llamo a fetch")
         const newMovies = await Promise.all(
-          recomendations.map((recomend) => fetchMovie(recomend))
+          recomendations.map((recomend) => fetchMovieWithCatch(recomend))
         );
+        console.log("termino de fetch")
+    
+        // Filter out null values (or any other fallback values)
+        
         const mergedMovies = await newMovies.flat();
-        const validated = await validateMovies(mergedMovies);
-        //funcion que remueve las peliculas o series duplicadas si el titulo e id son iguales
-        const uniqueMovies = validated.results.filter(
+        const validMovies = await mergedMovies.filter(movie => movie !== null);
+        console.log("llamo a validar")
+        const validated = await validateMovies(validMovies);
+        console.log("termino de validar")
+    
+        // Función que remueve las películas o series duplicadas si el título e id son iguales
+        const uniqueMovies = await validated.results.filter(
           (v, i, a) => a.findIndex((t) => t.id === v.id) === i
         );
+    
         setMovies(uniqueMovies);
         setIsLoading(false);
-        setValidateFlag(false);
       }
     };
+    
     fetchAllMovies();
   }, [recomendations]);
 

@@ -64,7 +64,7 @@ export const Results = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post("http:/generate", {
+        const res = await axios.post("https://webir-backend.onrender.com/generate", {
           prompt,
         });
         setRecomendations(res.data);

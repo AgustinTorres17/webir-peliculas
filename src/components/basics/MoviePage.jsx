@@ -52,7 +52,7 @@ export const MoviePage = () => {
 
   const fetchTrailerMovie = async (movieId) => {
     try {
-        const response = await fetch(`http://localhost:3000/movie/trailer/${movieId}`);
+        const response = await fetch(`https://webir-backend.onrender.com/movie/trailer/${movieId}`);
         const data = await response.json();
         const trailer = data.results.find(result => result.type === "Teaser" || result.type === "Trailer");
 

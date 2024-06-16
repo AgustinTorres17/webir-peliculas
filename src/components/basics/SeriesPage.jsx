@@ -57,7 +57,7 @@ export const SeriesPage = () => {
   
 const fetchTrailerSerie = async (serieId) => {
   try {
-      const response = await fetch(`http://localhost:3000/serie/trailer/${serieId}`);
+      const response = await fetch(`https://webir-backend.onrender.com/serie/trailer/${serieId}`);
       const data = await response.json();
       const trailer = data.results.find(result => result.type === "Teaser" || result.type === "Trailer");
       if (trailer) {
